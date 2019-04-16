@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TheaterRepository extends CrudRepository<Theater, Long> {
-  List<Theater> findByTheaterID (Long theaterID);
+  List<Theater> findByid (Long id);
 }
