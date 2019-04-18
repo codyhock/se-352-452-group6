@@ -6,6 +6,11 @@ target/
 *.logs
 *.iml
 *.lst
+*.DS_Store
+.classpath
+.project
+.settings/
 .idea/
 .eclipse
 movie.iml
+
