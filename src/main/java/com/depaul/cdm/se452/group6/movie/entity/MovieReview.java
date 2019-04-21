@@ -14,6 +14,7 @@ public class MovieReview implements Serializable {
   @GeneratedValue
   private Long id;
 
+  private Long userID;
   private String name;
   private Long year;
   private int rating;
