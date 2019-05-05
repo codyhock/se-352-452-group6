@@ -1,5 +1,7 @@
 package com.depaul.cdm.se452.group6.movie.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Data
 @Table(name = "drinks")
 public class Drink implements Serializable {
 	

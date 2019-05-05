@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SeatRepository extends CrudRepository<Seat, Long> {
 
-
-  List<Seat> findByTheater(int theaterId);
+  List<Seat> findAll();
+  List<Seat> findByTheaterId(Long theaterId);
 }

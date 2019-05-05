@@ -10,9 +10,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import java.io.Serializable;
 import java.util.List;
+
+import lombok.Data;
 import lombok.ToString;
 
 @Entity
+@Data
 @Table (
     name = "movies",
     uniqueConstraints = { @UniqueConstraint(columnNames = {"name", "year"} ) }
