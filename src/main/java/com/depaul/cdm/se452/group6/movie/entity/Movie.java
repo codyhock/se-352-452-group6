@@ -5,31 +5,31 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import java.io.Serializable;
 import java.util.List;
-
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
 @Data
+@Entity
 @Table (
     name = "movies",
     uniqueConstraints = { @UniqueConstraint(columnNames = {"name", "year"} ) }
 )
 public class Movie implements Serializable {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String name;
-  private Double runtime;
+  private int runtime;
   private String rating;
   private String genre;
-  private Long year;
+  private int year;
 
   @OneToMany(
       mappedBy = "movieID",

@@ -2,10 +2,14 @@ package com.depaul.cdm.se452.group6.movie.finder;
 
 import com.depaul.cdm.se452.group6.movie.entity.Theater;
 import org.springframework.data.repository.CrudRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
-import java.sql.Timestamp;
 
 public interface TheaterRepository extends CrudRepository<Theater, Long> {
-  List<Theater> findByTheater (Long theater);
-  List<Theater> findByTheaterAndTime (Long theater, Timestamp Time);
+  List<Theater> findByTheater (int theater);
+  List<Theater> findByTheaterAndTime (int theater, LocalDateTime Time);
+
+  @Override
+  List<Theater> findAll();
 }
