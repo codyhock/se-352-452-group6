@@ -1,7 +1,7 @@
 create table movies (
   id identity not null primary key,
   name varchar(40) not null,
-  runtime float not null,
+  runtime int not null,
   rating varchar(10) not null,
   genre varchar(20) not null,
   year int not null,

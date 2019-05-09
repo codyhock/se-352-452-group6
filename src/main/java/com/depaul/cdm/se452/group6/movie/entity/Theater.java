@@ -3,10 +3,19 @@ package com.depaul.cdm.se452.group6.movie.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,11 +26,11 @@ import java.util.List;
 )
 public class Theater implements Serializable {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long theater;
-  private Timestamp time;
+  private int theater;
+  private LocalDateTime time;
 
   @ManyToOne
   @JoinColumn(name = "movieID", nullable = false)
