@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface LogRepository extends CrudRepository<Log, Long> {
+  List<Log> findAll();
   List<Log> findByUserName (String userName);
   List<Log> findByTimeStamp (Date timeStamp);
 }

@@ -12,9 +12,6 @@ import javax.persistence.Id;
 @Data
 @Document(collection = "logs")
 public class Log implements Serializable {
-  @Id
-  @GeneratedValue
-  private Long id;
 
   private String userName;
   private String action;
