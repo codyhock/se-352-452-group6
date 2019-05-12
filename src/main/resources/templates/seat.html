@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ticket Booth</title>
+    <link href="../static/css/ticket-booth-seats.css" th:href="@{/css/ticket-booth-seats.css}" rel="stylesheet" />
+</head>
+<body>
+    <h1>Name of Selected Movie</h1>
+    <div th:if="${not #lists.isEmpty(seats)}">
+        <h2>Seat List</h2>
+        <table class="table seat-table" border="1">
+            <tr>
+                <th class="seat-header-id">Seat</th>
+                <th class="seat-header">Type</th>
+                <th class="seat-header">Availability</th>
+            </tr>
+            <tr th:each="seat : ${seats}">
+                <td class="seat-data-id" th:text="${seat.seatNumber}"></td>
+                <td class="seat-data" th:text="${seat.seatType.type}"></td>
+                <td class="seat-data" th:text="${seat.availability}"></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,14 +1,11 @@
 package com.depaul.cdm.se452.group6.movie.controller;
 
-import com.depaul.cdm.se452.group6.movie.entity.Seat;
 import com.depaul.cdm.se452.group6.movie.service.SeatService;
-import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/seats")
+@Controller
 public class SeatController {
 
   private SeatService seatService;
@@ -17,17 +14,10 @@ public class SeatController {
     this.seatService = seatService;
   }
 
-  @RequestMapping(method = RequestMethod.GET)
-  @ResponseStatus(HttpStatus.OK)
-  public List<Seat> getAll() {
-    return seatService.getSeats();
-  }
-
-
-  @RequestMapping(method = RequestMethod.GET, value = "/{theaterId}")
-  @ResponseStatus(HttpStatus.OK)
-  public List<Seat> getByTheater(@PathVariable long theaterId) {
-    return seatService.getSeatsByTheater(theaterId);
+  @GetMapping("theater/{theaterId}/seats")
+  public String getByTheater(@PathVariable long theaterId, Model model) {
+    model.addAttribute("seats", seatService.getSeatsByTheater(theaterId));
+    return "seat";
   }
 
 }

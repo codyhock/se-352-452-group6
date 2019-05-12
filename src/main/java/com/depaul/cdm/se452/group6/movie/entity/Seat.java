@@ -17,6 +17,10 @@ public class Seat {
   @Column(name="seat_number")
   private Long seatNumber;
 
+  // availability
+  @Column(name="availability")
+  private String availability;
+
   // seat_type
   @ManyToOne
   @JoinColumn(name="seat_type_id", nullable = false)
