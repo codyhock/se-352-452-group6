@@ -36,7 +36,7 @@ public class SeatService {
       logService.logSuccess("test_user", "getSeatsByTheater " + theaterId);
       return seats;
     } catch (Exception e) {
-      logService.logSuccess("test_user", "getSeatsByTheater " + theaterId);
+      logService.logError("test_user", "getSeatsByTheater " + theaterId);
       return null;
     }
   }
