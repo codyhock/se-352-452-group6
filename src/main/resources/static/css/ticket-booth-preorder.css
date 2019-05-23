@@ -1,0 +1,37 @@
+table {
+  border-collapse: collapse;
+  width: 100%
+}
+
+table, th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* center the buttons */
+.button-block {
+  width: 100%;
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;               /* letter color */
+  font-size: 12px;
+  padding: 10px 24px;         /* size of button */
+  border-radius: 12px;        /* shape of button */
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+
+}

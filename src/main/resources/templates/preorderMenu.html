@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Preorder Menu</title>
+    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
+    <script src="/js/preorder.js"></script>
+  </head>
+
+  <body>
+    <h1>PRE-ORDERS MENU</h1>
+    <div th:if="${not #lists.isEmpty(food)}">
+      <h2>Food</h2>
+      <table class="table food-table">
+
+        <tr>
+          <th class="food-header-id">Item</th>
+          <th class="food-header-id">Size</th>
+          <th class="food-header-id">Price per item</th>
+        </tr>
+
+        <tr th:each="f : ${food}">
+          <td class="food-data-id" th:text="${f.item}"></td>
+          <td class="food-data" th:text="${f.size}"></td>
+          <td class="food-data" th:text="${f.price}"></td>
+        </tr>
+
+      </table>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(drinks)}">
+      <h2>Drinks</h2>
+      <table class="table drink-table">
+
+        <tr>
+          <th class="drink-header-id">Item</th>
+          <th class="drink-header-id">Size</th>
+          <th class="drink-header-id">Price per item</th>
+        </tr>
+
+        <tr th:each="d : ${drinks}">
+          <td class="drink-data-id" th:text="${d.item}"></td>
+          <td class="drink-data" th:text="${d.size}"></td>
+          <td class="drink-data" th:text="${d.price}"></td>
+        </tr>
+
+      </table>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(alcohol)}">
+      <h2>Alcohol (Must be to 21+ to select)</h2>
+      <table class="table alcohol-table">
+
+        <tr>
+          <th class="alcohol-header-id">Type</th>
+          <th class="alcohol-header-id">Price per item</th>
+        </tr>
+
+        <tr th:each="al : ${alcohol}">
+          <td class="alcohol-data" th:text="${al.type}"></td>
+          <td class="alcohol-data" th:text="${al.price}"></td>
+        </tr>
+
+      </table>
+    </div>
+
+    <br>
+    <div class="button-block">
+      <button class="button" onclick="goBack()">Go Back</button>
+    </div>
+
+  </body>
+</html>
