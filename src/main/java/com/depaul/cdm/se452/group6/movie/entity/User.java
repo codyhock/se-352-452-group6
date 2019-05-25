@@ -27,10 +27,9 @@ public class User implements Serializable {
 	  
 	  private String email;
 	  
-	  private String username;
+	  private String dateOfBirth;
 	  
-	  private String password;
-	  
+	  private String phoneNumber;
 	  
 	 @ManyToOne
 	 @JoinColumn(name = "usertypeid", nullable = false)
