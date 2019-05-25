@@ -1,15 +1,21 @@
 package com.depaul.cdm.se452.group6.movie.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.depaul.cdm.se452.group6.movie.finder.Quantity;
 import com.depaul.cdm.se452.group6.movie.service.AlcoholService;
 import com.depaul.cdm.se452.group6.movie.service.DrinkService;
 import com.depaul.cdm.se452.group6.movie.service.FoodService;
 
 @Controller
-public class PreorderController {
+public class PreorderController implements WebMvcConfigurer {
 	private FoodService foodService;
 	private DrinkService drinkService;
 	private AlcoholService alcoholService;
@@ -31,11 +37,21 @@ public class PreorderController {
     }
     
     @GetMapping("/preorder-snacks-beverage/form")
-    public String showForm(Model model) {
+    public String showForm(Model model, Quantity quantity) {
     	model.addAttribute("food", foodService.getAllFood());
     	model.addAttribute("drinks", drinkService.getAllDrinks());
     	model.addAttribute("alcohol", alcoholService.getAllAlcohol());
         return "preorderForm";
+    }
+    
+    @PostMapping("/preorder-snacks-beverage/form")
+    public String checkQuantity(@Valid Quantity quantity, BindingResult bindingResult) {
+        
+    	if (bindingResult.hasErrors()) {
+        	return "preorderForm";
+        }
+    	
+        return "cart";
     }
 
 }

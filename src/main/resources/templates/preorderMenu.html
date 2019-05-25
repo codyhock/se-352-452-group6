@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
+    <head th:replace="fragments/header :: common-header">
     <title>Preorder Menu</title>
-    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
-    <script src="/js/preorder.js"></script>
   </head>
 
   <body>
-    <h1>PRE-ORDERS MENU</h1>
+    <div th:replace="fragments/header :: header"></div>
+    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
+    <script src="/js/preorder.js"></script>
+
+    <h1 align="center">PRE-ORDERS MENU</h1>
     <div th:if="${not #lists.isEmpty(food)}">
       <h2>Food</h2>
       <table class="table food-table">
@@ -67,6 +70,9 @@
     <div class="button-block">
       <button class="button" onclick="goBack()">Go Back</button>
     </div>
+    <br>
+
+    <div th:replace="fragments/footer :: footer"></div>
 
   </body>
 </html>

@@ -1,6 +1,15 @@
+/* Including one css file into other */
+/* @import "headerstyle.css"; */
+
+body {
+  background-color: #caddee;
+}
+
 table {
   border-collapse: collapse;
-  width: 100%
+  width: 70%;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 table, th, td {
@@ -8,17 +17,23 @@ table, th, td {
   padding: 8px;
 }
 
+/* zebra-striped tables */
 tr:nth-child(even){background-color: #f2f2f2}
 
+/* Color of table header */
 th {
   background-color: #4CAF50;
   color: white;
 }
 
+h2 {
+  margin-left: 200px;
+}
+
 /* center the buttons */
 .button-block {
   width: 100%;
-  text-align: center; #
+  text-align: center;
 }
 
 .button {
@@ -26,12 +41,12 @@ th {
   color: white;               /* letter color */
   font-size: 12px;
   padding: 10px 24px;         /* size of button */
-  border-radius: 12px;        /* shape of button */
+  border-radius: 2px;         /* shape of button */
 }
 
 .button:hover {
-  background-color: white;
+  background-color: #228B22;
   color: black;
-  border: 2px solid #4CAF50;
+  /* border: 2px solid #4CAF50; */
 
 }

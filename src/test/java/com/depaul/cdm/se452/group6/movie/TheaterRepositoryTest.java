@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDateTime;
 
-
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class TheaterRepositoryTest {

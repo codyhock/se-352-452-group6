@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <head th:replace="fragments/header :: common-header">
+    <title>Cart</title>
+  </head>
+
+  <body>
+    <div th:replace="fragments/header :: header"></div>
+    <h1 align="center">CART</h1>
+    <div class="table-div">
+      <table class="table cart-table">
+        <tr>
+          <th class="food-header-id">Item</th>
+          <th class="food-header-id">Quantity</th>
+          <th class="food-header-id">Price</th>
+        </tr>
+
+        <tr th:if="${not #lists.isEmpty(cart)}">
+          <td> No items </td>
+        </tr>
+
+        <tr th:each="lst : ${cart}">
+          <td th:if="${!lst.Empty()}" th:text="Not Empty"></td>
+          <td>1</td>
+          <td>4.50</td>
+        </tr>
+
+      </table>
+    </div>
+
+  </body>
+</html>

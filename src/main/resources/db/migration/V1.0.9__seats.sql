@@ -3,7 +3,7 @@ create table seats (
   seat_number int not null,
   seat_type_id 		int not null,
   theater_id int not null,
-  availability ENUM ('Available', 'Taken') DEFAULT 'Available',
+  availability ENUM ('Available', 'Unavailable') DEFAULT 'Available',
   CONSTRAINT FK_SEATS_TYPES foreign key (seat_type_id) references seat_types(id),
   CONSTRAINT FK_SEATS_THEATERS foreign key (theater_id) references theaters(id)
 );
