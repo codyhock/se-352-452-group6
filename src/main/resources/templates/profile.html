@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <head th:replace="fragments/header :: common-header">
+	      <title>Profile Page</title>
+    </head>
+
+  <body>
+   <div th:replace="fragments/header :: header"></div>
+    <link rel="stylesheet" href="css/profilestyle.css">
+    <div class="profile">
+      <div class="side">
+        <h2>User Info</h2>
+        <img src="../static/images/user.jpg" th:src="@{/images/user.jpg}" style="height:200px" alt="userimg">
+
+        <p>First Name</p> <br>
+        <p th:text="${firstname}"> <br>
+
+        <p>Last Name</p> <br>
+        <p th:text="${lastname}">
+
+      </div>
+
+        <div class="vl"></div>
+
+      <div class="main">
+        <h1>Welcome to your profile page</h1>
+        <hr>
+        <p>Upcoming movies</p>
+
+      </div>
+    </div>
+   
+    <div th:replace="fragments/footer :: footer"></div>
+    
+  </body>
+</html>

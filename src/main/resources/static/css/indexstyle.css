@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.header{
+  padding: 30px;
+  text-align: center;
+  background: #69c9ec;
+  color: black;
+}
+
+.topnav {
+  overflow: hidden;
+  padding: 14px 16px;
+  background-color: #292f7d;
+  position: sticky;
+  position: -webkit-sticky;
+  top:0;
+}
+
+.topnav .login-container {
+  text-align: center;
+}
+
+.topnav input[type=text] {
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  width: 200px;
+  background: #f1f1f1;
+}
+.topnav input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.topnav input[type=password] {
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  width: 200px;
+  background: #f1f1f1;
+}
+
+.topnav .login-container button {
+  float: center;
+  padding: 8px;
+  margin-top: 8px;
+  color: white;
+  background-color: #4CAF50;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.topnav .login-container button:hover {
+  background-color: #ff0006;
+}
+
+
+.container {
+  padding: 16px;
+  text-align: center;
+  background-color: #caddee;
+}
+
+input[type=text1] {
+  font-size: 17px;
+  width: 300px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text2] {
+  font-size: 17px;
+  width: 200px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text], input[type=info], input[type=password] {
+  font-size: 17px;
+  width: 600px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input input[type=text]:focus, input[type=text1]:focus, input[type=text2]:focus, input[type=info]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 2px solid #292f7d;
+  margin-bottom: 25px;
+}
+
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 17px;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 300px;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  background-color: #ff0006;
+}
+
+a {
+  color: dodgerblue;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.footer{
+  padding: 50px;
+  text-align: left;
+  background: #69c9ec;
+  color: black;
+}
