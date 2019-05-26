@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.depaul.cdm.se452.group6.movie.finder.Quantity;
+import com.depaul.cdm.se452.group6.movie.entity.Item;
 import com.depaul.cdm.se452.group6.movie.service.AlcoholService;
 import com.depaul.cdm.se452.group6.movie.service.DrinkService;
 import com.depaul.cdm.se452.group6.movie.service.FoodService;
@@ -37,7 +37,7 @@ public class PreorderController implements WebMvcConfigurer {
     }
     
     @GetMapping("/preorder-snacks-beverage/form")
-    public String showForm(Model model, Quantity quantity) {
+    public String showForm(Model model, Item item) {
     	model.addAttribute("food", foodService.getAllFood());
     	model.addAttribute("drinks", drinkService.getAllDrinks());
     	model.addAttribute("alcohol", alcoholService.getAllAlcohol());
@@ -45,11 +45,11 @@ public class PreorderController implements WebMvcConfigurer {
     }
     
     @PostMapping("/preorder-snacks-beverage/form")
-    public String checkQuantity(@Valid Quantity quantity, BindingResult bindingResult) {
+    public String checkQuantity(@Valid Item item, BindingResult bindingResult) {
         
     	if (bindingResult.hasErrors()) {
-        	return "preorderForm";
-        }
+        	return "redirect:/preorder-snacks-beverage/form";
+        } 
     	
         return "cart";
     }

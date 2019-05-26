@@ -3,6 +3,8 @@
 
 body {
   background-color: #caddee;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
 table {
@@ -48,5 +50,9 @@ h2 {
   background-color: #228B22;
   color: black;
   /* border: 2px solid #4CAF50; */
-
 }
+
+/* class for no items in cart */
+/* .no-items {
+  empty-cells: show;
+} */

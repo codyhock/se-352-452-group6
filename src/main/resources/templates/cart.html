@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <head th:replace="fragments/header :: common-header">
+    <!-- <head th:replace="fragments/header :: common-header"> -->
     <title>Cart</title>
   </head>
 
   <body>
-    <div th:replace="fragments/header :: header"></div>
+    <!-- <div th:replace="fragments/header :: header"></div> -->
+    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
     <h1 align="center">CART</h1>
     <div class="table-div">
       <table class="table cart-table">
@@ -16,15 +17,17 @@
           <th class="food-header-id">Price</th>
         </tr>
 
-        <tr th:if="${not #lists.isEmpty(cart)}">
-          <td> No items </td>
+        <tr class="no-items" th:if="${#lists.isEmpty(cart)}">
+          <td>No Item</td>
+          <td>No Item</td>
+          <td>No Item</td>
         </tr>
 
-        <tr th:each="lst : ${cart}">
-          <td th:if="${!lst.Empty()}" th:text="Not Empty"></td>
-          <td>1</td>
-          <td>4.50</td>
-        </tr>
+        <!-- <tr th:each="item : ${session.cart}">
+          <td th:text="${item.food.name}"></td>
+          <td th:text="${item.foodQuantity}"></td>
+          <td th:text="${item.food.price}"></td>
+        </tr> -->
 
       </table>
     </div>

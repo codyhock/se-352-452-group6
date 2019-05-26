@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <head th:replace="fragments/header :: common-header">
+    <!-- <head th:replace="fragments/header :: common-header"> -->
       <title>Preorder Form</title>
   </head>
 
   <body>
-    <div th:replace="fragments/header :: header"></div>
+    <!-- <div th:replace="fragments/header :: header"></div> -->
 
     <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
-    <script src="/js/preorder.js"></script>
+    <script type="text/javascript" th:src="@{/js/preorder.js}" src="/js/preorder.js"></script>
 
-    <form action="#" th:action="@{/preorder-snacks-beverage/form}" th:object="${quantity}" method="post">
+    <form action="#" th:action="@{/preorder-snacks-beverage/form}" th:object="${item}" method="post">
 
       <h1 align="center">MAKE PRE-ORDERS TO YOUR SEAT</h1>
+
       <div th:if="${not #lists.isEmpty(food)}">
         <h2>Food</h2>
         <table class="table food-table">
@@ -28,9 +29,9 @@
           <tr th:each="f : ${food}">
             <td class="food-data-id" th:text="${f.item}"></td>
             <td class="food-data" th:text="${f.size}"></td>
-            <td class="food-data" th:text="${f.price}" onchange="setTwoDecimal"></td>
-            <td class="food-quantity"><input type="number" value="0" th:field="*{numberOfItems}" placeholder="Ex: 1"></td>
-            <span th:if="${#fields.hasErrors('numberOfItems')}" th:errors="*{numberOfItems}">Invalid number</span>
+            <td class="food-data" th:text="${f.price}"></td>
+            <td class="food-quantity"><input type="number" name="quantity" value="0" th:field="*{foodQuantity}" placeholder="e.g. 1"></td>
+            <span th:if="${#fields.hasErrors('foodQuantity')}" th:errors="*{foodQuantity}">Invalid number</span>
           </tr>
 
         </table>
@@ -85,7 +86,7 @@
     </form>
 
 
-    <div th:replace="fragments/footer :: footer"></div>
+    <!-- <div th:replace="fragments/footer :: footer"></div> -->
 
   </body>
 </html>
