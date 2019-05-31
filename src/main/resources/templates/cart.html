@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <!-- <head th:replace="fragments/header :: common-header"> -->
+    <head th:replace="fragments/header :: common-header">
     <title>Cart</title>
   </head>
 
   <body>
-    <!-- <div th:replace="fragments/header :: header"></div> -->
-    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
+    <div th:replace="fragments/header :: header"></div>
+    <link href="/css/preorder.css" rel="stylesheet">
     <h1 align="center">CART</h1>
+
     <div class="table-div">
       <table class="table cart-table">
         <tr>
@@ -23,14 +24,24 @@
           <td>No Item</td>
         </tr>
 
-        <!-- <tr th:each="item : ${session.cart}">
-          <td th:text="${item.food.name}"></td>
-          <td th:text="${item.foodQuantity}"></td>
-          <td th:text="${item.food.price}"></td>
-        </tr> -->
+        <div th:if="${not #lists.isEmpty(cart)}" th:object="${cart}">
+          <tr th:each="food, foodStat : *{foodCart}">
+            <td th:text="*{foodCart[__${foodStat.index}__].food.item} + '' + *{foodCart[__${foodStat.index}__].food.size}"></td>
+            <td th:text="*{foodCart[__${foodStat.index}__].foodQuantity}"></td>
+            <td th:text="*{foodCart[__${foodStat.index}__].food.price}"></td>
+          </tr>
+        </div>
 
       </table>
     </div>
+
+    <br>
+    <div class="button-block">
+            <button class="button" type="submit">CHECKOUT</button> <button class="button" type="submit">Empty Cart</button>
+    </div>
+    <br>
+
+    <div th:replace="fragments/footer :: footer"></div>
 
   </body>
 </html>

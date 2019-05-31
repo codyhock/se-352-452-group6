@@ -8,20 +8,21 @@ import lombok.Data;
 @Data
 public class Item {
 	
-	private Food food; 
-//	private Drink drink; 
-//	private AlcoholItem alcohol; 
+	private Food foodItem;
+	private Drink drinkItem;
+	private AlcoholItem	alcoholItem;
 	
 	@NotNull
 	@Min(0)
 	private int foodQuantity;
 	
-//	@NotNull
-//	@Min(0)
-//	private int drinkQuantity;
-//	
-//	@NotNull
-//	@Min(0)
-//	private int alcoholQuantity;
+	@NotNull
+	@Min(0)
+	private int drinkQuantity;
+	
+	@NotNull
+	@Min(0)
+	private int alcoholQuantity;
+	
 
 }

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <!-- <head th:replace="fragments/header :: common-header"> -->
+    <head th:replace="fragments/header :: common-header">
     <title>Preorder Menu</title>
   </head>
 
   <body>
-    <!-- <div th:replace="fragments/header :: header"></div> -->
-    <link href="/css/ticket-booth-preorder.css" rel="stylesheet">
+    <div th:replace="fragments/header :: header"></div>
+    <link href="/css/preorder.css" rel="stylesheet">
     <script src="/js/preorder.js"></script>
 
-    <h1 align="center">PRE-ORDERS MENU</h1>
+    <h1 align="center">MENU</h1>
     <div th:if="${not #lists.isEmpty(food)}">
       <h2>Food</h2>
       <table class="table food-table">
@@ -24,7 +24,7 @@
         <tr th:each="f : ${food}">
           <td class="food-data-id" th:text="${f.item}"></td>
           <td class="food-data" th:text="${f.size}"></td>
-          <td class="food-data" th:text="${f.price}"></td>
+          <td class="food-data" th:text="${#numbers.formatDecimal(f.price,1,2,'POINT')}"></td>
         </tr>
 
       </table>
@@ -43,7 +43,7 @@
         <tr th:each="d : ${drinks}">
           <td class="drink-data-id" th:text="${d.item}"></td>
           <td class="drink-data" th:text="${d.size}"></td>
-          <td class="drink-data" th:text="${d.price}"></td>
+          <td class="drink-data" th:text="${#numbers.formatDecimal(d.price,1,2,'POINT')}"></td>
         </tr>
 
       </table>
@@ -60,7 +60,7 @@
 
         <tr th:each="al : ${alcohol}">
           <td class="alcohol-data" th:text="${al.type}"></td>
-          <td class="alcohol-data" th:text="${al.price}"></td>
+          <td class="alcohol-data" th:text="${#numbers.formatDecimal(al.price,1,2,'POINT')}"></td>
         </tr>
 
       </table>
@@ -72,7 +72,7 @@
     </div>
     <br>
 
-    <!-- <div th:replace="fragments/footer :: footer"></div> -->
+    <div th:replace="fragments/footer :: footer"></div>
 
   </body>
 </html>
