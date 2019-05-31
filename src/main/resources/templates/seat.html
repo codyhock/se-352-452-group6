@@ -1,26 +1,157 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Ticket Booth</title>
-    <link href="../static/css/ticket-booth-seats.css" th:href="@{/css/ticket-booth-seats.css}" rel="stylesheet" />
-</head>
-<body>
-    <h1>Name of Selected Movie</h1>
-    <div th:if="${not #lists.isEmpty(seats)}">
-        <h2>Seat List</h2>
-        <table class="table seat-table" border="1">
-            <tr>
-                <th class="seat-header-id">Seat</th>
-                <th class="seat-header">Type</th>
-                <th class="seat-header">Availability</th>
-            </tr>
-            <tr th:each="seat : ${seats}">
-                <td class="seat-data-id" th:text="${seat.seatNumber}"></td>
-                <td class="seat-data" th:text="${seat.seatType.type}"></td>
-                <td class="seat-data" th:text="${seat.availability}"></td>
-            </tr>
-        </table>
-    </div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-</body>
+    <head th:replace="fragments/header :: common-header">
+        <title>Seats</title>
+    </head>
+
+    <body>
+
+        <div th:replace="fragments/header :: header"></div>
+        <link rel="stylesheet" href="/css/seatstyle.css">
+        <div class="seats">
+            <div class="side">
+                <div style="float: left;">
+                    <span>
+                        <img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap">
+                    </span>
+                    <span>Handicap</span>
+                </div>
+                <br>
+                <div style="float: left;">
+                    <span>
+                        <img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard">
+                    </span>
+                    <span>Standard</span>
+                </div>
+                <br>
+                <div style="float: left;">
+                    <span>
+                        <img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner">
+                    </span>
+                    <span>Recliner</span>
+                </div>
+                <br>
+                <div style="float: left;">
+                    <span>
+                        <img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat">
+                    </span>
+                    <span>Loveseat</span>
+                </div>
+                <br>
+                <div style="float: left;">
+                    <span>
+                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                    </span>
+                    <span>Taken</span>
+                </div>
+            </div>
+
+            <div class="vl"></div>
+
+            <div class="main">
+                <div>
+                    <span style="padding: 10px;">
+                        <select id="date-select">
+                            <option value="">Select Date</option>
+                        </select>
+                    </span>
+                    <span style="padding: 10px;">
+                        <select id="time-select">
+                            <option value="">Select Time</option>
+                        </select>
+                    </span>
+                    <span style="padding: 10px;">
+                        <select id="theater-select">
+                            <option value="">Select Theater</option>
+                        </select>
+                    </span>
+                </div>
+                <br>
+                <br>
+                <h1>{Name of Selected Movie}</h1>
+                <div th:if="${not #lists.isEmpty(seats)}">
+                    <h2>Screen</h2>
+                    <!--Handicap Seats-->
+                    <span th:each="seat : ${seats}">
+                        <span th:switch="${seat.seatType.type}">
+                            <span th:case="'Handicap'" style="padding: 10px;">
+                                <span th:switch="${seat.availability}">
+                                    <span th:case="'Available'">
+                                        <img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap">
+                                    </span>
+                                    <span th:case="*">
+                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <br>
+                    <br>
+                    <br>
+                    <!--Standard Seats-->
+                    <span th:each="seat : ${seats}">
+                        <span th:switch="${seat.seatType.type}">
+                            <span th:case="'Standard'" style="padding: 10px;">
+                                <span th:switch="${seat.availability}">
+                                    <span th:case="'Available'">
+                                        <img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard">
+                                    </span>
+                                    <span th:case="*">
+                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <br>
+                    <br>
+                    <br>
+                    <!--Recliner Seats-->
+                    <span th:each="seat : ${seats}">
+                        <span th:switch="${seat.seatType.type}">
+                            <span th:case="'Recliner'" style="padding: 10px;">
+                                <span th:switch="${seat.availability}">
+                                    <span th:case="'Available'">
+                                        <img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner">
+                                    </span>
+                                    <span th:case="*">
+                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <br>
+                    <br>
+                    <br>
+                    <!--Loveseat Seats-->
+                    <span th:each="seat : ${seats}">
+                        <span th:switch="${seat.seatType.type}">
+                            <span th:case="'Loveseat'" style="padding: 10px;">
+                                <span th:switch="${seat.availability}">
+                                    <span th:case="'Available'">
+                                        <img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat">
+                                    </span>
+                                    <span th:case="*">
+                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div>
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer"></div>
+
+    </body>
 </html>
