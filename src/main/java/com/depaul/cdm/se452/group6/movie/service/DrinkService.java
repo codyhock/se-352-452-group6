@@ -23,32 +23,31 @@ public class DrinkService {
 			logService.logSuccess("test_user", "getDrink");
 			return listOfFood;
 		} catch (Exception e) {
-	        logService.logSuccess("test_user", "getDrink");
-	        return null;
-	    }
+			logService.logError("test_user", "getDrink");
+			return null;
+		}
 	}
 	
 	public List<Drink> getDrinkByItem(String item) {
 		try {
 			List<Drink> listOfFood = drinkRepository.findByItem(item);
-	        logService.logSuccess("test_user", "getDrinkByItem " + item);
-	        return listOfFood;
-	    } catch (Exception e) {
-	        logService.logSuccess("test_user", "getDrinkByItem " + item);
-	        return null;
-	    }
-
+			logService.logSuccess("test_user", "getDrinkByItem " + item);
+			return listOfFood;
+		} catch (Exception e) {
+			logService.logError("test_user", "getDrinkByItem " + item);
+			return null;
+		}
 	}
 
 	public List<Drink> getDrinkByItemAndSize(String item, String size) {
 		try {
 			List<Drink> listOfFood = drinkRepository.findByItem(item);
-	        logService.logSuccess("test_user", "getDrinkByItemAndSize " + item + ", " + size);
-	        return listOfFood;
-	    } catch (Exception e) {
-	        logService.logSuccess("test_user", "getDrinkByItemAndSize " + item + ", " + size);
-	        return null;
-	    }
+			logService.logSuccess("test_user", "getDrinkByItemAndSize " + item + ", " + size);
+			return listOfFood;
+		} catch (Exception e) {
+			logService.logError("test_user", "getDrinkByItemAndSize " + item + ", " + size);
+			return null;
+		}
 	}
 
 }

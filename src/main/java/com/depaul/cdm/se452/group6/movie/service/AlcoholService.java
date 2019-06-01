@@ -23,31 +23,30 @@ public class AlcoholService {
 			logService.logSuccess("test_user", "getAlcohol");
 			return listOfFood;
 		} catch (Exception e) {
-	        logService.logSuccess("test_user", "getAlcohol");
-	        return null;
-	    }
+			logService.logError("test_user", "getAlcohol");
+			return null;
+		}
 	}
 	
 	public List<AlcoholItem> getAlcoholByType(String type) {
 		try {
 			List<AlcoholItem> listOfFood = alcoholRepository.findByType(type);
-	        logService.logSuccess("test_user", "getAlcoholByType " + type);
-	        return listOfFood;
-	    } catch (Exception e) {
-	        logService.logSuccess("test_user", "getAlcoholByType " + type);
-	        return null;
-	    }
-
+			logService.logSuccess("test_user", "getAlcoholByType " + type);
+			return listOfFood;
+		} catch (Exception e) {
+			logService.logError("test_user", "getAlcoholByType " + type);
+			return null;
+		}
 	}
 
 	public List<AlcoholItem> getAlcoholByPrice(Double price) {
 		try {
 			List<AlcoholItem> listOfFood = alcoholRepository.findByPrice(price);
-	        logService.logSuccess("test_user", "getAlcoholByPrice " + price);
-	        return listOfFood;
-	    } catch (Exception e) {
-	        logService.logSuccess("test_user", "getAlcoholByPrice " + price);
-	        return null;
-	    }
+			logService.logSuccess("test_user", "getAlcoholByPrice " + price);
+			return listOfFood;
+		} catch (Exception e) {
+			logService.logError("test_user", "getAlcoholByPrice " + price);
+			return null;
+		}
 	}
 }
