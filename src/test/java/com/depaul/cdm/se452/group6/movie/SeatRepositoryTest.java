@@ -25,7 +25,7 @@ public class SeatRepositoryTest {
   @Test
   public void testFindAll() {
     int numOfRows = repository.findAll().size();
-    final int EXPECTED_NUM_OF_ROWS = 80;
+    final int EXPECTED_NUM_OF_ROWS = 160;
     Assert.assertEquals(numOfRows, EXPECTED_NUM_OF_ROWS);
   }
 
@@ -33,7 +33,7 @@ public class SeatRepositoryTest {
   public void testFindByTheater() {
     Long theater = 1L;
     int numOfRows = repository.findByTheaterId(theater).size();
-    final int EXPECTED_NUM_OF_ROWS = 20;
+    final int EXPECTED_NUM_OF_ROWS = 40;
     Assert.assertEquals(numOfRows, EXPECTED_NUM_OF_ROWS);
   }
 

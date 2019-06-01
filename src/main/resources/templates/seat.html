@@ -50,104 +50,114 @@
             <div class="vl"></div>
 
             <div class="main">
-                <div>
-                    <span style="padding: 10px;">
-                        <select id="date-select">
-                            <option value="">Select Date</option>
-                        </select>
-                    </span>
-                    <span style="padding: 10px;">
-                        <select id="time-select">
-                            <option value="">Select Time</option>
-                        </select>
-                    </span>
-                    <span style="padding: 10px;">
-                        <select id="theater-select">
-                            <option value="">Select Theater</option>
-                        </select>
-                    </span>
-                </div>
-                <br>
-                <br>
-                <h1>{Name of Selected Movie}</h1>
-                <div th:if="${not #lists.isEmpty(seats)}">
-                    <h2>Screen</h2>
-                    <!--Handicap Seats-->
-                    <span th:each="seat : ${seats}">
-                        <span th:switch="${seat.seatType.type}">
-                            <span th:case="'Handicap'" style="padding: 10px;">
-                                <span th:switch="${seat.availability}">
-                                    <span th:case="'Available'">
-                                        <img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap">
-                                    </span>
-                                    <span th:case="*">
-                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                <form action="#" data-th-action="@{/seats/submit}" data-th-object="${seats}" method="post">
+                    <div>
+                        <span style="padding: 10px;">
+                            <select id="date-select">
+                                <option value="">Select Date</option>
+                            </select>
+                        </span>
+                        <span style="padding: 10px;">
+                            <select id="time-select">
+                                <option value="">Select Time</option>
+                            </select>
+                        </span>
+                        <span style="padding: 10px;">
+                            <select id="theater-select">
+                                <option value="">Select Theater</option>
+                            </select>
+                        </span>
+                    </div>
+                    <br>
+                    <br>
+                    <h1>{Name of Selected Movie}</h1>
+                    <div th:if="${not #lists.isEmpty(seats)}">
+                        <h2>Screen</h2>
+                        <!--Handicap Seats-->
+                        <span th:each="seat : ${seats}">
+                            <span th:switch="${seat.seatType.type}">
+                                <span th:case="'Handicap'" style="padding: 10px;">
+                                    <span th:switch="${seat.availability}">
+                                        <span th:case="'Available'">
+                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap"></label>
+                                        </span>
+                                        <span th:case="*">
+                                            <input type="checkbox" disabled th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable"></label>
+                                        </span>
                                     </span>
                                 </span>
                             </span>
                         </span>
-                    </span>
-                    <br>
-                    <br>
-                    <br>
-                    <!--Standard Seats-->
-                    <span th:each="seat : ${seats}">
-                        <span th:switch="${seat.seatType.type}">
-                            <span th:case="'Standard'" style="padding: 10px;">
-                                <span th:switch="${seat.availability}">
-                                    <span th:case="'Available'">
-                                        <img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard">
-                                    </span>
-                                    <span th:case="*">
-                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
-                                    </span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-                    <br>
-                    <br>
-                    <br>
-                    <!--Recliner Seats-->
-                    <span th:each="seat : ${seats}">
-                        <span th:switch="${seat.seatType.type}">
-                            <span th:case="'Recliner'" style="padding: 10px;">
-                                <span th:switch="${seat.availability}">
-                                    <span th:case="'Available'">
-                                        <img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner">
-                                    </span>
-                                    <span th:case="*">
-                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                        <br>
+                        <br>
+                        <br>
+                        <!--Standard Seats-->
+                        <span th:each="seat : ${seats}">
+                            <span th:switch="${seat.seatType.type}">
+                                <span th:case="'Standard'" style="padding: 10px;">
+                                    <span th:switch="${seat.availability}">
+                                        <span th:case="'Available'">
+                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard"></label>
+                                        </span>
+                                        <span th:case="*">
+                                            <input type="checkbox" disabled th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable"></label>
+                                        </span>
                                     </span>
                                 </span>
                             </span>
                         </span>
-                    </span>
-                    <br>
-                    <br>
-                    <br>
-                    <!--Loveseat Seats-->
-                    <span th:each="seat : ${seats}">
-                        <span th:switch="${seat.seatType.type}">
-                            <span th:case="'Loveseat'" style="padding: 10px;">
-                                <span th:switch="${seat.availability}">
-                                    <span th:case="'Available'">
-                                        <img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat">
-                                    </span>
-                                    <span th:case="*">
-                                        <img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable">
+                        <br>
+                        <br>
+                        <br>
+                        <!--Recliner Seats-->
+                        <span th:each="seat : ${seats}">
+                            <span th:switch="${seat.seatType.type}">
+                                <span th:case="'Recliner'" style="padding: 10px;">
+                                    <span th:switch="${seat.availability}">
+                                        <span th:case="'Available'">
+                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner"></label>
+                                        </span>
+                                        <span th:case="*">
+                                            <input type="checkbox" disabled th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable"></label>
+                                        </span>
                                     </span>
                                 </span>
                             </span>
                         </span>
-                    </span>
-                </div>
-                <br>
-                <br>
-                <br>
-                <div>
-                    <button>Add to Cart</button>
-                </div>
+                        <br>
+                        <br>
+                        <br>
+                        <!--Loveseat Seats-->
+                        <span th:each="seat : ${seats}">
+                            <span th:switch="${seat.seatType.type}">
+                                <span th:case="'Loveseat'" style="padding: 10px;">
+                                    <span th:switch="${seat.availability}">
+                                        <span th:case="'Available'">
+                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat"></label>
+                                        </span>
+                                        <span th:case="*">
+                                            <input type="checkbox" disabled th:id="${seat.id}" />
+                                            <label th:for="${seat.id}"><img src="../static/images/unavailable.ico" th:src="@{/images/unavailable.ico}" alt="unavailable"></label>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <button type="submit" name="submit">Add to Cart</button>
+                    </div>
+                </form>
             </div>
         </div>
 
