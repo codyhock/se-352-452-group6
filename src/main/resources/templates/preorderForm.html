@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <head th:replace="fragments/header :: common-header">
+      <title>Preorder Form</title>
+  </head>
+
+  <body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <link href="/css/preorder.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/preorder.js}" src="/js/preorder.js"></script>
+
+    <h1 align="center">MAKE PRE-ORDERS TO YOUR SEAT</h1>
+
+    <div th:if="${not #lists.isEmpty(listOfFood)}">
+      <h2>Food</h2>
+        <table class="table food-table">
+
+          <tr>
+            <th class="food-header-id">Item</th>
+            <th class="food-header-id">Size</th>
+            <th class="food-header-id">Price per item</th>
+            <th class="food-header-id">Quantity</th>
+          </tr>
+
+          <tr th:each="f : ${listOfFood}">
+            <td class="food-data-id" th:text="${f.item}"></td>
+            <td class="food-data" th:text="${f.size}"></td>
+            <td class="food-data" th:text="${#numbers.formatDecimal(f.price,1,2,'POINT')}"></td>
+            <td class="food-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+          </tr>
+
+        </table>
+      </div>
+
+      <div th:if="${not #lists.isEmpty(listOfDrinks)}">
+        <h2>Drinks</h2>
+        <table class="table drink-table">
+
+          <tr>
+            <th class="drink-header-id">Item</th>
+            <th class="drink-header-id">Size</th>
+            <th class="drink-header-id">Price per item</th>
+            <th class="drink-header-id">Quantity</th>
+          </tr>
+
+          <tr th:each="d : ${listOfDrinks}">
+            <td class="drink-data-id" th:text="${d.item}"></td>
+            <td class="drink-data" th:text="${d.size}"></td>
+            <td class="drink-data" th:text="${#numbers.formatDecimal(d.price,1,2,'POINT')}"></td>
+            <td class="drink-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+          </tr>
+
+        </table>
+      </div>
+
+      <div th:if="${not #lists.isEmpty(listOfAlcohol)}">
+        <h2>Alcohol (Must be to 21+ to select)</h2>
+        <table class="table alcohol-table">
+
+          <tr>
+            <th class="alcohol-header-id">Type</th>
+            <th class="alcohol-header-id">Price per item</th>
+            <th class="alcohol-header-id">Quantity</th>
+          </tr>
+
+          <tr th:each="al : ${listOfAlcohol}">
+            <td class="alcohol-data" th:text="${al.type}"></td>
+            <td class="alcohol-data" th:text="${#numbers.formatDecimal(al.price,1,2,'POINT')}"></td>
+            <td class="alcohol-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+          </tr>
+
+        </table>
+      </div>
+
+      <br>
+      <div class="button-block">
+              <button class="button" type="submit" th:onclick="window.location.href = '/cart'">Add to Cart</button> <button class="button" th:onclick="javascript:skipPage()" id="skip-button">SKIP</button>
+      </div>
+
+    <br>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+</html>
