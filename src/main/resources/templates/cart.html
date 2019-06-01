@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <head th:replace="fragments/header :: common-header">
+    <title>Cart</title>
+  </head>
+
+  <body>
+    <div th:replace="fragments/header :: header"></div>
+    <link href="/css/preorder.css" rel="stylesheet">
+
+    <h1 align="center">CART</h1>
+
+    <div class="table-div">
+      <table class="table cart-table">
+        <tr>
+          <th class="food-header-id" colspan="2">Items</th>
+          <th class="food-header-id">Quantity</th>
+          <th class="food-header-id">Price</th>
+        </tr>
+
+        <tr>
+          <td colspan="2">Cypto 5.10.2019 at 9pm IMAX Seat 6 Standard</td>
+          <td>2</td>
+          <td>11.99</td>
+        </tr>
+
+        <!-- <tr class="no-items" th:if="${#lists.isEmpty(cart)}">
+          <td colspan="2">No Item</td>
+          <td>No Item</td>
+          <td>No Item</td>
+        </tr> -->
+
+        <!-- <tr th:each="c : ${cart}">
+          <td th:text="${c.food.item}"></td>
+          <td th:text="${c.food.size}"></td>
+          <td th:text="${c.food.price}"></td>
+        </tr> -->
+
+      </table>
+    </div>
+
+    <br>
+    <span class="total">
+      <b>TOTAL</b><br>
+      <b>11.99</b>
+    </span>
+    <br>
+
+    <br>
+    <div class="button-block">
+            <button class="button" type="submit">CHECKOUT</button> <button class="button">Empty Cart</button>
+    </div>
+
+    <br>
+    <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+</html>
