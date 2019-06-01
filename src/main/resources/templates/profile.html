@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
     <head th:replace="fragments/header :: common-header">
         <title>Profile Page</title>
     </head>
@@ -7,6 +8,7 @@
   <body>
    <div th:replace="fragments/header :: header"></div>
     <link rel="stylesheet" href="css/profilestyle.css">
+    
     <div class="profile">
       <div class="side">
         <h2>User Info</h2>
@@ -23,10 +25,31 @@
         <div class="vl"></div>
 
       <div class="main">
-        <h1>Welcome to your profile page</h1>
+        <h1><p th:text="'Welcome to your profile page ' + ${firstname} + '!'"></h1>
         <hr>
-        <p>Upcoming movies</p>
+        <p>Coming soon</p>
 
+          <div class="upcoming1">
+            <img src="../static/images/godzilla.jpg" th:src="@{/images/godzilla.jpg}"alt="upcoming1">
+            <p>Godzilla King of the Monsters</p>
+            <img src="../static/images/toystory.jpg" th:src="@{/images/toystory.jpg}" alt="upcoming1">
+            <p>Toy Story 4</p>
+          </div>
+
+          <div class="upcoming2">
+            <img src="../static/images/spiderman.jpg" th:src="@{/images/spiderman.jpg}" alt="upcoming2">
+            <p>Spider-Man Far From Home</p>
+            <img src="../static/images/darkphoenix.jpg" th:src="@{/images/darkphoenix.jpg}" alt="upcoming2">
+            <p>X-Men Dark Phoenix</p>
+          </div>
+      </div>
+      
+      <div class="vl2"></div>
+      
+      <div class="side2">
+        <h3>Don't forget to pre-order snacks and drinks before you checkout.</h3>
+        <img src="../static/images/snackspromo.jpg" th:src="@{/images/snackspromo.jpg}" alt="promo">
+        <p>Relax in your seat and we'll bring you your order.</p>
       </div>
     </div>
    
