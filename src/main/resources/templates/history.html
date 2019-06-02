@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <head th:replace="fragments/header :: common-header">
+        <title>Purchase History</title>
+    </head>
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <link rel="stylesheet" href="css/historystyle.css">
+
+    <h1>Purchase History</h1>
+    <hr>
+    <h2 th:text="${date2}"></h2>
+
+    <div class="table-div">
+        <table class="table history-table">
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Additional Info</th>
+            </tr>
+
+            <tr>
+                <td>Avengers</td>
+                <td>2</td>
+                <td>5:45 pm</td>
+            </tr>
+
+            <tr>
+                <td>Popcorn</td>
+                <td>1</td>
+                <td>Large</td>
+            </tr>
+
+            <tr>
+                <td>Soda</td>
+                <td>2</td>
+                <td>Small</td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
