@@ -30,6 +30,7 @@ public class Movie implements Serializable {
   private String rating;
   private String genre;
   private int year;
+  private String image;
 
   @OneToMany(
       mappedBy = "movieID",

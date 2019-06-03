@@ -15,14 +15,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 @Data
 @Table (
     name = "theaters",
-    uniqueConstraints = { @UniqueConstraint(columnNames = {"theater", "time"} ) }
+    uniqueConstraints = { @UniqueConstraint(columnNames = {"theater", "date", "time"} ) }
 )
 public class Theater implements Serializable {
   @Id
@@ -30,7 +31,8 @@ public class Theater implements Serializable {
   private Long id;
 
   private int theater;
-  private LocalDateTime time;
+  private LocalDate date;
+  private LocalTime time;
 
   @ManyToOne
   @JoinColumn(name = "movieID", nullable = false)

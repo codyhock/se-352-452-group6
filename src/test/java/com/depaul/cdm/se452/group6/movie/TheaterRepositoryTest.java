@@ -13,7 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -40,20 +41,24 @@ public class TheaterRepositoryTest {
   @Test
   public void testTheater() {
     final int THEATER_NUM = 2;
-    final LocalDateTime TIME_STAMP = LocalDateTime.of(2019,4,13,12,0);
+    //final LocalDateTime TIME_STAMP = LocalDateTime.of(2019,4,13,12,0);
+    final LocalDate DATE = LocalDate.of(2019,4,13);
+    final LocalTime TIME = LocalTime.of(12, 0);
     final String MOVIE_NAME = "Avengers: End Game";
     final int RUN_TIME = 182;
 
-    Theater theater = repository.findByTheaterAndTime(THEATER_NUM, TIME_STAMP).get(0);
+    Theater theater = repository.findByTheaterAndDateAndTime(THEATER_NUM, DATE, TIME).get(0);
     int theaterNumber = theater.getTheater();
     Movie movie = theater.getMovieID();
     String movieName = movie.getName();
     int runtime = movie.getRuntime();
-    LocalDateTime time = theater.getTime();
+    LocalDate date = theater.getDate();
+    LocalTime time = theater.getTime();
 
     Assert.assertEquals(movieName, MOVIE_NAME);
     Assert.assertEquals(theaterNumber, THEATER_NUM);
-    Assert.assertEquals(time, TIME_STAMP);
+    Assert.assertEquals(date, DATE);
+    Assert.assertEquals(time, TIME);
     Assert.assertEquals(runtime, RUN_TIME);
   }
 
@@ -63,20 +68,23 @@ public class TheaterRepositoryTest {
     final int THEATER_NUM = 1;
     final Movie MOVIE = movieRepository.findByName(MOVIE_NAME).get(0);
     final TheaterType THEATER_TYPE = theaterTypeRepository.findByType("Standard").get(0);
-    final LocalDateTime TIME_STAMP = LocalDateTime.of(2019,4,13,18,0);
+    final LocalDate DATE = LocalDate.of(2019,4,13);
+    final LocalTime TIME = LocalTime.of(18,0);
 
     Theater test = new Theater();
     test.setTheater(THEATER_NUM);
-    test.setTime(TIME_STAMP);
+    test.setDate(DATE);
+    test.setTime(TIME);
     test.setMovieID(MOVIE);
     test.setTheaterType(THEATER_TYPE);
 
     entityManager.persist(test);
     entityManager.flush();
 
-    Theater found = repository.findByTheaterAndTime(THEATER_NUM, TIME_STAMP).get(0);
+    Theater found = repository.findByTheaterAndDateAndTime(THEATER_NUM, DATE, TIME).get(0);
 
-    Assert.assertEquals(found.getTime(), TIME_STAMP);
+    Assert.assertEquals(found.getDate(), DATE);
+    Assert.assertEquals(found.getTime(), TIME);
     Movie foundMovie = found.getMovieID();
     Assert.assertEquals(foundMovie.getId(), MOVIE.getId());
   }
@@ -84,13 +92,16 @@ public class TheaterRepositoryTest {
   @Test
   public void testUpdate() {
     final int THEATER_NUM = 1;
-    final LocalDateTime TIME_STAMP = LocalDateTime.of(2019,4,13,15,0);
-    final LocalDateTime NEW_TIME = LocalDateTime.of(2019,4,13,18,0);
-    Theater found = repository.findByTheaterAndTime(THEATER_NUM, TIME_STAMP).get(0);
+    final LocalDate DATE = LocalDate.of(2019,4,13);
+    final LocalTime TIME = LocalTime.of(15,0);
+    final LocalDate NEW_DATE = LocalDate.of(2019,4,13);
+    final LocalTime NEW_TIME = LocalTime.of(18,0);
+    Theater found = repository.findByTheaterAndDateAndTime(THEATER_NUM, DATE, TIME).get(0);
+    found.setDate(NEW_DATE);
     found.setTime(NEW_TIME);
     entityManager.persistAndFlush(found);
 
-    Assert.assertEquals(0, repository.findByTheaterAndTime(THEATER_NUM, TIME_STAMP).size());
-    Assert.assertEquals(1, repository.findByTheaterAndTime(THEATER_NUM, NEW_TIME).size());
+    Assert.assertEquals(0, repository.findByTheaterAndDateAndTime(THEATER_NUM, DATE, TIME).size());
+    Assert.assertEquals(1, repository.findByTheaterAndDateAndTime(THEATER_NUM, NEW_DATE, NEW_TIME).size());
   }
 }
