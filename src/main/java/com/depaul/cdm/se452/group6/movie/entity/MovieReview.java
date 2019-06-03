@@ -12,11 +12,11 @@ import javax.persistence.Id;
 public class MovieReview implements Serializable {
   @Id
   @GeneratedValue
-  private Long id;
+  private Long _id;
 
   private Long userID;
-  private String name;
-  private Long year;
+  private String userName;
+  private Long movieID;
   private int rating;
   private String comment;
 }

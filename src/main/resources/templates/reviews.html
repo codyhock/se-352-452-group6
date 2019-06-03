@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: common-header">
+    <title>Reviews</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<link rel="stylesheet" href="/css/reviewsstyle.css">
+<div class="reviews">
+    <div class="card">
+        <div class="poster"><img width="220" height="326"></div>
+        <div class="container">
+            <h2 th:text="${movie.name}"><b></b></h2>
+            <p th:text="${movie.rating}"></p>
+            <p th:text="${movie.runtime} + ' minutes'"></p>
+            <p th:text="${movie.genre}"></p>
+        </div>
+    </div>
+    <div class="review">
+        <textarea name="message" style="width:500px; height:50px;">Leave review here.</textarea><br>
+        <h4>Rating</h4><br>
+        <input type="radio" name="rating" value="1" checked> 1
+        <input type="radio" name="rating" value="2"> 2
+        <input type="radio" name="rating" value="3"> 3
+        <input type="radio" name="rating" value="4"> 4
+        <input type="radio" name="rating" value="5"> 5<br>
+        <button type="submit">Submit Review</button>
+    </div>
+    <div class="card" th:each="review : ${review}">
+        <h4 th:text="${review.userName}"></h4>
+        <p th:text="${review.rating}"></p>
+        <p th:text="${review.comment}"></p>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
