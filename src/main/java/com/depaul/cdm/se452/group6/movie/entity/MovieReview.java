@@ -10,9 +10,9 @@ import javax.persistence.Id;
 @Data
 @Document(collection = "reviews")
 public class MovieReview implements Serializable {
-  @Id
+  /*@Id
   @GeneratedValue
-  private Long _id;
+  private Long _id;*/
 
   private Long userID;
   private String userName;

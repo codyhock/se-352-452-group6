@@ -26,7 +26,7 @@
         <input type="radio" name="rating" value="5"> 5<br>
         <button type="submit">Submit Review</button>
     </div>
-    <div class="card" th:each="review : ${review}">
+    <div class="card" th:each="review : ${reviews}">
         <h4 th:text="${review.userName}"></h4>
         <p th:text="${review.rating}"></p>
         <p th:text="${review.comment}"></p>
