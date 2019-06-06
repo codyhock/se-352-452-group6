@@ -34,7 +34,7 @@ public class MovieReviewService {
     }
   }
 
-  public List<MovieReview> getReviewsByUser(Long id) {
+  public List<MovieReview> getReviewsByUserID(Long id) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findByUserID(id);
       return reviews;

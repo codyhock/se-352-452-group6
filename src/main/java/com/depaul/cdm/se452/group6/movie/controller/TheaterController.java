@@ -23,7 +23,7 @@ public class TheaterController {
   @GetMapping("movie-listings")
   public String getMoviesByDate(Model model) {
     List<Theater> theaters = theaterService.getTheatersByDate(LocalDate.of(2019, 4, 13));
-    //model.addAttribute("theaters", theaterService.getTheatersByDate(LocalDate.of(2019, 4, 13)));
+    model.addAttribute("theaters", theaterService.getTheatersByDate(LocalDate.of(2019, 4, 13)));
     HashMap<String, ArrayList<Theater>> movies = new HashMap<>();
     for (Theater theater: theaters) {
         String name = theater.getMovieID().getName();
