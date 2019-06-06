@@ -13,20 +13,20 @@
     <div class="date">
         <h1>Date: 04-13-2019</h1>
         <span style="padding: 10px;">
-            <select id="date-select">
-                <option value="">Select Date</option>
-            </select>
+            <input type="date" name="date">
         </span>
     </div>
 
     <div class="card" th:each="movie : ${movies}">
-        <div class="poster"><img th:src="@{${'/images/' + movie.value[0].movieID.image}}" alt="endgame"></div>
+        <div class="poster"><img th:src="@{${'/images/' + movie.value[0].movieID.image}}" th:alt="movie.value[0].movieID.name"></div>
         <div class="container">
             <h2 th:text="${movie.key}"><b></b></h2>
             <p th:text="${movie.value[0].movieID.rating}"></p>
             <p th:text="${movie.value[0].movieID.runtime} + ' minutes'"></p>
             <p th:text="${movie.value[0].movieID.genre}"></p>
-            <p><button type="button">Info</button></p>
+            <form action="#" th:action="@{${'/reviews/movie/' + movie.value[0].movieID.id}}">
+                <button type="submit">Info</button>
+            </form>
             <span th:each="theater : ${movie.value}">
                 <form action="#" th:action="@{${'/theater/' + theater.id + '/seats'}}">
                     <button type="submit" th:text="${theater.time}"></button>

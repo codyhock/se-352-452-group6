@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: common-header">
+    <title>Reviews</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<link rel="stylesheet" href="/css/reviewsstyle.css">
+<div class="reviews">
+    <div class="card">
+        <div class="poster"><img th:src="@{${'/images/' + movie.image}}" th:alt="${movie.name}"></div>
+        <div class="container">
+            <h2 th:text="${movie.name}"><b></b></h2>
+            <p th:text="${movie.rating}"></p>
+            <p th:text="${movie.runtime} + ' minutes'"></p>
+            <p th:text="${movie.genre}"></p>
+            <p th:text="${currentRating} + ' / 5'"></p>
+        </div>
+    </div>
+    <div class="review">
+        <form action="#" th:action="@{${'/reviews/movie/' + movie.id + '/addReview'}}" th:object="${newReview}" method="post">
+            <textarea th:field="*{comment}" id="comment" placeholder="Leave review here." style="width:500px; height:50px;"></textarea><br>
+            <span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Must not be blank.</span>
+            <h4>Rating</h4><br>
+            <input type="radio" th:field="*{rating}" value="1"> 1
+            <input type="radio" th:field="*{rating}" value="2"> 2
+            <input type="radio" th:field="*{rating}" value="3"> 3
+            <input type="radio" th:field="*{rating}" value="4"> 4
+            <input type="radio" th:field="*{rating}" value="5"> 5<br>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+    <div class="card" th:each="review : ${reviews}">
+        <h4 th:text="${review.userName}"></h4>
+        <p th:text="${review.rating}"></p>
+        <p th:text="${review.comment}"></p>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
