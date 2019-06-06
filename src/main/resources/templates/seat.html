@@ -70,7 +70,7 @@
                     </div>
                     <br>
                     <br>
-                    <h1>{Name of Selected Movie}</h1>
+                    <h1 th:text="${movieName}" />
                     <div th:if="${not #lists.isEmpty(seats)}">
                         <h2>Screen</h2>
                         <!--Handicap Seats-->
@@ -154,8 +154,8 @@
                     <br>
                     <br>
                     <br>
-                    <div>
-                        <button type="submit" name="submit">Add to Cart</button>
+                    <div class="button-block">
+                        <button class="button" type="submit" name="submit">Add to Cart</button>
                     </div>
                 </form>
             </div>
