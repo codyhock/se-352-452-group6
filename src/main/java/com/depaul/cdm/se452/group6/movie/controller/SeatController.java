@@ -33,6 +33,9 @@ public class SeatController {
     model.addAttribute("seats", seats);
     model.addAttribute("form", seats);
     model.addAttribute("movieName", movie.getName());
+    model.addAttribute("date", theater.getDate());
+    model.addAttribute("time", theater.getTime());
+    model.addAttribute("theaterType", theater.getTheaterType().getType());
     return "seat";
   }
 

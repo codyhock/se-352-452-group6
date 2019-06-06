@@ -6,7 +6,6 @@ create table movies (
   genre varchar(20) not null,
   year int not null,
   image varchar(100),
-
   CONSTRAINT UK_MOVIES unique (name, year)
 );
 

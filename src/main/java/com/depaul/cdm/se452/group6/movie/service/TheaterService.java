@@ -19,7 +19,7 @@ public class TheaterService {
 
   public Theater getById(Long id) {
     try {
-      Theater theater = theaterRepository.findByTheater(id.intValue()).get(0);
+      Theater theater = theaterRepository.findById(id).get();
       logService.logSuccess("testUser" , "got theater by id " + id);
       return theater;
     } catch (Exception e) {
