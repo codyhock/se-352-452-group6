@@ -52,25 +52,13 @@
             <div class="main">
                 <form action="#" data-th-action="@{/seats/submit}" data-th-object="${seats}" method="post">
                     <div>
-                        <span style="padding: 10px;">
-                            <select id="date-select">
-                                <option value="">Select Date</option>
-                            </select>
-                        </span>
-                        <span style="padding: 10px;">
-                            <select id="time-select">
-                                <option value="">Select Time</option>
-                            </select>
-                        </span>
-                        <span style="padding: 10px;">
-                            <select id="theater-select">
-                                <option value="">Select Theater</option>
-                            </select>
-                        </span>
+                        <h3 th:text="${date}" style="padding: 10px; display: inline;"/>
+                        <h3 th:text="${time}" style="padding: 10px; display: inline;"/>
+                        <h3 th:text="${theaterType}" style="padding: 10px; display: inline;"/>
                     </div>
                     <br>
                     <br>
-                    <h1>{Name of Selected Movie}</h1>
+                    <h1 th:text="${movieName}" />
                     <div th:if="${not #lists.isEmpty(seats)}">
                         <h2>Screen</h2>
                         <!--Handicap Seats-->
@@ -154,8 +142,8 @@
                     <br>
                     <br>
                     <br>
-                    <div>
-                        <button type="submit" name="submit">Add to Cart</button>
+                    <div class="button-block">
+                        <button class="button" type="submit" name="submit">Add to Cart</button>
                     </div>
                 </form>
             </div>

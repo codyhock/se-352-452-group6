@@ -29,7 +29,7 @@
             </form>
             <span th:each="theater : ${movie.value}">
                 <form action="#" th:action="@{${'/theater/' + theater.id + '/seats'}}">
-                    <button type="submit" th:text="${theater.time}"></button>
+                    <button type="submit" th:text="${theater.time} + ' ' + ${theater.theaterType.type}"></button>
                 </form>
             </span>
         </div>

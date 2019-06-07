@@ -25,8 +25,8 @@ public class SeatRepositoryTest {
   @Test
   public void testFindAll() {
     int numOfRows = repository.findAll().size();
-    final int EXPECTED_NUM_OF_ROWS = 160;
-    Assert.assertEquals(numOfRows, EXPECTED_NUM_OF_ROWS);
+    final int EXPECTED_NUM_OF_ROWS = 240;
+    Assert.assertEquals(EXPECTED_NUM_OF_ROWS, numOfRows);
   }
 
   @Test

@@ -39,3 +39,23 @@ hr {
 h1 {
     text-align: center;
 }
+
+.button:hover {
+    background-color: #228B22;
+    color: black;
+    /* border: 2px solid #4CAF50; */
+}
+
+/* center the buttons */
+.button-block {
+    width: 100%;
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;               /* letter color */
+    font-size: 12px;
+    padding: 10px 24px;         /* size of button */
+    border-radius: 2px;         /* shape of button */
+}
