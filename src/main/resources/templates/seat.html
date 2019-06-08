@@ -50,7 +50,7 @@
             <div class="vl"></div>
 
             <div class="main">
-                <form action="#" data-th-action="@{/seats/submit}" data-th-object="${seats}" method="post">
+                <form action="#" th:action="@{/seats}" th:object="${userSeats}"  method="post">
                     <div>
                         <h3 th:text="${date}" style="padding: 10px; display: inline;"/>
                         <h3 th:text="${time}" style="padding: 10px; display: inline;"/>
@@ -67,8 +67,8 @@
                                 <span th:case="'Handicap'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" />
-                                            <label th:for="${seat.id}"><img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap"></label>
+                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
+                                            <label th:for="${seat.id}" ><img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap"></label>
                                         </span>
                                         <span th:case="*">
                                             <input type="checkbox" disabled th:id="${seat.id}" />
@@ -87,7 +87,7 @@
                                 <span th:case="'Standard'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard"></label>
                                         </span>
                                         <span th:case="*">
@@ -107,7 +107,7 @@
                                 <span th:case="'Recliner'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner"></label>
                                         </span>
                                         <span th:case="*">
@@ -127,7 +127,7 @@
                                 <span th:case="'Loveseat'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" />
+                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat"></label>
                                         </span>
                                         <span th:case="*">
