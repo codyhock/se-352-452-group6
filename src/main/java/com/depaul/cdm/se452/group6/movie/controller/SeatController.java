@@ -1,6 +1,7 @@
 package com.depaul.cdm.se452.group6.movie.controller;
 
 import com.depaul.cdm.se452.group6.movie.entity.*;
+import com.depaul.cdm.se452.group6.movie.model.PreOrder;
 import com.depaul.cdm.se452.group6.movie.model.Seats;
 import com.depaul.cdm.se452.group6.movie.service.*;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class SeatController {
   }
 
   @RequestMapping(value="/seats", method=RequestMethod.POST)
-  public String submit(@ModelAttribute("selectedSeats") Seats userSeats, BindingResult bindingResult) {
+  public String submit(@ModelAttribute("selectedSeats") Seats userSeats, Model model) {
     List<Ticket> tickets = new ArrayList<Ticket>();
     for (Long seat : userSeats.getSelectedSeats()) {
       Seat s = seatService.getSeatById(seat);
@@ -66,6 +67,7 @@ public class SeatController {
 
     cartService.createTicket(1L, ticketIds);
 
+    model.addAttribute("preOrder", new PreOrder());
     return "redirect:/preorder/form";
   }
 
