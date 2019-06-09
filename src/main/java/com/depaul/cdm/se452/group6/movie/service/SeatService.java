@@ -1,7 +1,9 @@
 package com.depaul.cdm.se452.group6.movie.service;
 
 import com.depaul.cdm.se452.group6.movie.entity.Seat;
+import com.depaul.cdm.se452.group6.movie.entity.SeatType;
 import com.depaul.cdm.se452.group6.movie.finder.SeatRepository;
+import com.depaul.cdm.se452.group6.movie.finder.SeatTypeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -13,15 +15,18 @@ import java.util.List;
 public class SeatService {
 
   private SeatRepository seatRepository;
+  private SeatTypeRepository seatTypeRepository;
   private LogService logService;
   private EntityManager entityManager;
 
   public SeatService(SeatRepository seatRepository,
+                     SeatTypeRepository seatTypeRepository,
                      LogService logService,
                      EntityManager entityManager) {
     this.seatRepository = seatRepository;
     this.logService = logService;
     this.entityManager = entityManager;
+    this.seatTypeRepository = seatTypeRepository;
   }
 
   public List<Seat> getSeats() {
@@ -53,6 +58,17 @@ public class SeatService {
       return seat;
     } catch (Exception e) {
       logService.logError("test_user", "get seat by id");
+      return null;
+    }
+  }
+
+  public List<SeatType> getSeatTypes() {
+    try {
+      List<SeatType> seatTypes = seatTypeRepository.findAll();
+      logService.logSuccess("test_user", "get all seat types");
+      return seatTypes;
+    } catch (Exception e) {
+      logService.logError("test_user", "get all seat types");
       return null;
     }
   }

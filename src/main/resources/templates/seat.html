@@ -45,6 +45,12 @@
                     </span>
                     <span>Taken</span>
                 </div>
+                <br><br>
+                <div style="foat: left;">
+                    <span th:each="seatType : ${seatTypes}">
+                        <p th:text="${seatType.type} + ': $' + ${seatType.price}"></p>
+                    </span>
+                </div>
             </div>
 
             <div class="vl"></div>
@@ -60,7 +66,7 @@
                     <br>
                     <h1 th:text="${movieName}" />
                     <div th:if="${not #lists.isEmpty(seats)}">
-                        <h2>Screen</h2>
+                        <h2 th:text="'Screen #' + ${screen}">Screen</h2>
                         <!--Handicap Seats-->
                         <span th:each="seat : ${seats}">
                             <span th:switch="${seat.seatType.type}">

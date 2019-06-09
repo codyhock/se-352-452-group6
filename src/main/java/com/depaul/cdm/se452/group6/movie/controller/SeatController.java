@@ -37,13 +37,16 @@ public class SeatController {
     Theater theater = theaterService.getById(theaterId);
     Movie movie = movieService.getMovie(theater.getMovieID().getId());
     List<Seat> seats = seatService.getSeatsByTheater(theaterId);
+    List<SeatType> seatTypes = seatService.getSeatTypes();
     model.addAttribute("seats", seats);
     model.addAttribute("form", seats);
     model.addAttribute("movieName", movie.getName());
     model.addAttribute("date", theater.getDate());
     model.addAttribute("time", theater.getTime());
     model.addAttribute("theaterType", theater.getTheaterType().getType());
+    model.addAttribute("screen", theater.getTheater());
     model.addAttribute("userSeats", new Seats());
+    model.addAttribute("seatTypes", seatTypes);
     return "seat";
   }
 
