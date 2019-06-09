@@ -10,5 +10,5 @@ public interface SeatRepository extends CrudRepository<Seat, Long> {
 
   List<Seat> findAll();
   List<Seat> findByTheaterId(Long theaterId);
-  Optional<Seat> findById(Long id);
+  Seat findById(long id);
 }

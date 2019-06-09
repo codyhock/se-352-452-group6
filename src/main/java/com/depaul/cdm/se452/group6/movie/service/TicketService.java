@@ -5,6 +5,8 @@ import com.depaul.cdm.se452.group6.movie.entity.Ticket;
 import com.depaul.cdm.se452.group6.movie.finder.TicketRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -12,11 +14,27 @@ public class TicketService {
 	
 	private TicketRepository ticketRepository;
 	private LogService logService;
+	private EntityManager entityManager;
 	
 	public TicketService(TicketRepository ticketRepository,
- 						 LogService logService) {
+ 						 						LogService logService,
+											 EntityManager entityManager) {
 		this.ticketRepository = ticketRepository;
 		this.logService = logService;
+		this.entityManager = entityManager;
+	}
+
+	@Transactional
+	public Ticket createTicket(Ticket t) {
+		try {
+			entityManager.persist(t);
+			entityManager.flush();
+			ticketRepository.findBySeat(t.getSeat());
+			return ticketRepository.findBySeat(t.getSeat());
+		} catch (Exception e) {
+			logService.logError("test_user", "create ticket");
+			return null;
+		}
 	}
 	
 	public List<Ticket> getTickets() {

@@ -22,6 +22,15 @@ public class CartService {
 	public List<Cart> getCartByUserId(Long userId) {
 		return cartRepository.findByUserId(userId);
 	}
+
+	public Cart createTicket(Long userId, List<Long> ticketIds) {
+		Cart cart = new Cart();
+		cart.setTicketCart(ticketIds);
+		cart.setUserId(userId);
+		cartRepository.save(cart);
+
+		return cart;
+	}
 	
 	public Cart cartSuccess(Long userId
 			, List<Long> ticketId

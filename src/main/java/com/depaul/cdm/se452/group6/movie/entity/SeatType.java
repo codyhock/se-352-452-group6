@@ -18,4 +18,5 @@ public class SeatType implements Serializable {
   private Long id;
 
   private String type;
+  private double price;
 }
