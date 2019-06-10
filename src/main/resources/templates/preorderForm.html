@@ -10,6 +10,8 @@
 
     <link href="/css/preorder.css" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/preorder.js}" src="/js/preorder.js"></script>
+    <!-- Form for adding to cart -->
+    <form action="#" th:action="@{/preorder/form}" th:object="${cart}" method="post">
 
     <h1 align="center">MAKE PRE-ORDERS TO YOUR SEAT</h1>
 
@@ -28,7 +30,9 @@
             <td class="food-data-id" th:text="${f.item}"></td>
             <td class="food-data" th:text="${f.size}"></td>
             <td class="food-data" th:text="${#numbers.formatDecimal(f.price,1,2,'POINT')}"></td>
-            <td class="food-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+            <td class="food-quantity">
+              <input type="number" min="0" th:field="*{foodCart[__${f.id}__]}" placeholder="e.g. 0">
+            </td>
           </tr>
 
         </table>
@@ -49,7 +53,9 @@
             <td class="drink-data-id" th:text="${d.item}"></td>
             <td class="drink-data" th:text="${d.size}"></td>
             <td class="drink-data" th:text="${#numbers.formatDecimal(d.price,1,2,'POINT')}"></td>
-            <td class="drink-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+            <td class="drink-quantity">
+              <input type="number" min="0" th:field="*{drinkCart[__${d.id}__]}" placeholder="e.g. 0">
+            </td>
           </tr>
 
         </table>
@@ -68,7 +74,9 @@
           <tr th:each="al : ${listOfAlcohol}">
             <td class="alcohol-data" th:text="${al.type}"></td>
             <td class="alcohol-data" th:text="${#numbers.formatDecimal(al.price,1,2,'POINT')}"></td>
-            <td class="alcohol-quantity"><input type="number" name="quantity" value="0" placeholder="e.g. 0"></td>
+            <td class="alcohol-quantity">
+              <input type="number" min="0" th:field="*{alcoholCart[__${al.id}__]}" placeholder="e.g. 0">
+            </td>
           </tr>
 
         </table>
@@ -76,8 +84,10 @@
 
       <br>
       <div class="button-block">
-              <button class="button" type="submit" th:onclick="window.location.href = '/cart'">Add to Cart</button> <button class="button" th:onclick="javascript:skipPage()" id="skip-button">SKIP</button>
+              <button class="button" type="submit" th:onclick="window.location.href = '/cart'">Add to Cart</button> <button class="button" type="button" th:onclick="javascript:skipPage()" id="skip-button">SKIP</button>
       </div>
+
+    </form> <!-- Form to add to cart -->
 
     <br>
 

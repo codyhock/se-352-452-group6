@@ -1,8 +1,6 @@
 package com.depaul.cdm.se452.group6.movie.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.depaul.cdm.se452.group6.movie.entity.Food;
@@ -47,6 +45,17 @@ public class FoodService {
 			return listOfFood;
 		} catch (Exception e) {
 			logService.logError("test_user", "getFoodByItemAndSize " + item + ", " + size);
+			return null;
+		}
+	}
+	
+	public Food getFoodById(long id) {
+		try {
+			Food food = foodRepository.findById(id);
+			logService.logSuccess("test_user", "getFoodByFoodId " + id);
+			return food;
+		} catch (Exception e) {
+			logService.logError("test_user", "getFoodByFoodId " + id);
 			return null;
 		}
 	}

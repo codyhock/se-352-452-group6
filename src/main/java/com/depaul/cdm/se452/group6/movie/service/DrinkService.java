@@ -49,5 +49,16 @@ public class DrinkService {
 			return null;
 		}
 	}
+	
+	public Drink getDrinkById(long id) {
+		try {
+			Drink drink = drinkRepository.findById(id);
+			logService.logSuccess("test_user", "getDrinkByDrinkId " + id);
+			return drink;
+		} catch (Exception e) {
+			logService.logError("test_user", "getDrinkByDrinkId " + id);
+			return null;
+		}
+	}
 
 }
