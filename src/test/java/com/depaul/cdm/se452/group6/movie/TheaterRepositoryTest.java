@@ -34,7 +34,7 @@ public class TheaterRepositoryTest {
   @Test
   public void testFindAll() {
     int numOfRows = repository.findAll().size();
-    final int EXPECTED_NUM_OF_ROWS = 5;
+    final int EXPECTED_NUM_OF_ROWS = 6;
     Assert.assertEquals(numOfRows, EXPECTED_NUM_OF_ROWS);
   }
 

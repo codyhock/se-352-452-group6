@@ -12,5 +12,7 @@ public interface AlcoholItemRepository extends CrudRepository<AlcoholItem, Long>
     List<AlcoholItem> findByPrice(Double price);
     
     List<AlcoholItem> findAll();
+    
+    AlcoholItem findById(long id);
 
 }

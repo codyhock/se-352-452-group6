@@ -15,7 +15,7 @@
         <span style="padding: 10px;">
             <input type="date" name="date">
         </span>
-    </div>
+    </div><br>
 
     <div class="card" th:each="movie : ${movies}">
         <div class="poster"><img th:src="@{${'/images/' + movie.value[0].movieID.image}}" th:alt="movie.value[0].movieID.name"></div>
@@ -25,11 +25,11 @@
             <p th:text="${movie.value[0].movieID.runtime} + ' minutes'"></p>
             <p th:text="${movie.value[0].movieID.genre}"></p>
             <form action="#" th:action="@{${'/reviews/movie/' + movie.value[0].movieID.id}}">
-                <button type="submit">Info</button>
-            </form>
-            <span th:each="theater : ${movie.value}">
+                <button class="button" type="submit">Info</button>
+            </form><br>
+            <span id="times" th:each="theater : ${movie.value}">
                 <form action="#" th:action="@{${'/theater/' + theater.id + '/seats'}}">
-                    <button type="submit" th:text="${theater.time}"></button>
+                    <button class="button" type="submit" th:text="${theater.time} + ' ' + ${theater.theaterType.type}"></button>
                 </form>
             </span>
         </div>

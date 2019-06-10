@@ -9,6 +9,7 @@
     <div th:replace="fragments/header :: header"></div>
     <link href="/css/preorder.css" rel="stylesheet">
 
+    <form action="#" th:action="@{/cart}" th:object="${total}" method="post">
     <h1 align="center">CART</h1>
 
     <div class="table-div">
@@ -19,23 +20,30 @@
           <th class="food-header-id">Price</th>
         </tr>
 
-        <tr>
-          <td colspan="2">Cypto 5.10.2019 at 9pm IMAX Seat 6 Standard</td>
-          <td>2</td>
-          <td>11.99</td>
+        <tr th:if="${not #lists.isEmpty(tickets)}" th:each="t : ${tickets}">
+          <td colspan="2" th:text="${t.seat.theater.movieID.name + '  ' + t.seat.theater.date + '  ' + t.seat.theater.time + '  SEAT ' + t.seat.seatNumber}"></td>
+          <td type="number" th:text="1" onload="calculate()"></td>
+          <td type="number" th:text="${#numbers.formatDecimal(t.seat.seatType.price,1,2,'POINT')}"></td>
+
         </tr>
 
-        <!-- <tr class="no-items" th:if="${#lists.isEmpty(cart)}">
-          <td colspan="2">No Item</td>
-          <td>No Item</td>
-          <td>No Item</td>
-        </tr> -->
+        <tr th:if="${not #lists.isEmpty(prefood)}" th:each="f : ${prefood}">
+          <td colspan="2" th:text="${f.key.item} + '  ' + ${f.key.size} "></td>
+          <td type="number" th:text="${f.value}"></td>
+          <td type="number" th:text="${#numbers.formatDecimal(f.key.price,1,2,'POINT')}"></td>
+        </tr>
 
-        <!-- <tr th:each="c : ${cart}">
-          <td th:text="${c.food.item}"></td>
-          <td th:text="${c.food.size}"></td>
-          <td th:text="${c.food.price}"></td>
-        </tr> -->
+        <tr th:if="${not #lists.isEmpty(predrink)}" th:each="d : ${predrink}">
+          <td colspan="2" th:text="${d.key.item} + '  ' + ${d.key.size} "></td>
+          <td type="number" th:text="${d.value}"></td>
+          <td type="number" th:text="${#numbers.formatDecimal(d.key.price,1,2,'POINT')}"></td>
+        </tr>
+
+        <tr th:if="${not #lists.isEmpty(prealcohol)}" th:each="al : ${prealcohol}">
+          <td colspan="2" th:text="${al.key.type}"></td>
+          <td type="number" th:text="${al.value}" onload="calculate()"></td>
+          <td type="number" th:text="${#numbers.formatDecimal(al.key.price,1,2,'POINT')}"></td>
+        </tr>
 
       </table>
     </div>
@@ -43,7 +51,7 @@
     <br>
     <span class="total">
       <b>TOTAL</b><br>
-      <b>11.99</b>
+      <b><span th:text="${#numbers.formatDecimal(total,1,2,'POINT')}"></span></b>
     </span>
     <br>
 
@@ -51,6 +59,7 @@
     <div class="button-block">
             <button class="button" type="submit">CHECKOUT</button> <button class="button">Empty Cart</button>
     </div>
+    </form>
 
     <br>
     <div th:replace="fragments/footer :: footer"></div>

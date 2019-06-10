@@ -49,4 +49,15 @@ public class AlcoholService {
 			return null;
 		}
 	}
+	
+	public AlcoholItem getAlcoholById(long id) {
+		try {
+			AlcoholItem alcoholItem = alcoholRepository.findById(id);
+			logService.logSuccess("test_user", "getAlcoholItemByAlcoholId " + id);
+			return alcoholItem;
+		} catch (Exception e) {
+			logService.logError("test_user", "getAlcoholByAlcoholId " + id);
+			return null;
+		}
+	}
 }
