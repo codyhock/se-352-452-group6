@@ -8,4 +8,6 @@ public interface DrinkRepository extends CrudRepository<Drink, Long> {
 	List<Drink> findAll();
 	List<Drink> findByItem(String item);
 	List<Drink> findByItemAndSize(String item, String size);
+	
+	Drink findById(long id);
 }
