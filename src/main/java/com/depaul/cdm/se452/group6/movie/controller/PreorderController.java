@@ -85,8 +85,6 @@ public class PreorderController implements WebMvcConfigurer {
 			}
 		} 
 		
-//		cartService.cartSuccess(1L, cartService.getCartByUserId(1L).get(0).getTicketCart()
-//				, cart.getFoodCart(), cart.getDrinkCart(), cart.getAlcoholCart());
 		cartService.cartSuccess(1L, new ArrayList<Long>()
 				, cart.getFoodCart(), cart.getDrinkCart(), cart.getAlcoholCart());
 		

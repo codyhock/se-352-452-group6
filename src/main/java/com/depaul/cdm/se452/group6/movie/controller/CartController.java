@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.depaul.cdm.se452.group6.movie.entity.AlcoholItem;
 import com.depaul.cdm.se452.group6.movie.entity.Cart;
@@ -55,23 +56,19 @@ public class CartController {
 		
 		 
 		for (Cart cart: cartList) {
-			// store list of tickets in the list
+			// store list of tickets in the list and total ticketprice 
 			if (!cart.getTicketCart().isEmpty()) {
 				for (Long tid : cart.getTicketCart()) {
 					for (Ticket ticket : ticketService.findTicketsByid(tid)) {
 						ticketList.add(ticket);
+						Double price = ticket.getSeat().getSeatType().getPrice();
+						ticketPrice += price;
 					}
 			    }
-				// find ticket price
-				for (Ticket t : ticketList) {
-					Double price = t.getSeat().getSeatType().getPrice();
-					System.out.println("Ticket price each: " + price);
-					ticketPrice += price; 
-				}
 			}  
 			
-			System.out.println("TICKETLIST SIZE: " + ticketList.size());
-			
+				
+			// store food/quantity in map and total foodprice 
 			if (!cart.getFoodCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getFoodCart().entrySet()) {
 					Food food = foodService.getFoodById(e.getKey());
@@ -86,7 +83,7 @@ public class CartController {
 			    }
 			}
 			
-			// store drink/quantity in map
+			// store drink/quantity in map and total drinkprice 
 			if (!cart.getDrinkCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getDrinkCart().entrySet()) { 
 					Drink drink = drinkService.getDrinkById(e.getKey());
@@ -101,7 +98,7 @@ public class CartController {
 			    } 
 			}
 			
-			// store alcohol/quantity in map
+			// store alcohol/quantity in map and total alcoholprice 
 			if (!cart.getAlcoholCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getAlcoholCart().entrySet()) { 
 					AlcoholItem alcohol = alcoholService.getAlcoholById(e.getKey());
@@ -116,19 +113,22 @@ public class CartController {
 				} 
 			}
 		}
-		System.out.println(" ----- TP: " + ticketPrice 
-				+ "-----\n ----- FP: " + foodPrice
-				+ "-----\n ----- DP: " + drinkPrice
-				+ "-----\n ----- AP: " + alcoholPrice);
+
 		total = ticketPrice + foodPrice + drinkPrice + alcoholPrice;
 		
 		model.addAttribute("tickets", ticketList);
 		model.addAttribute("prefood", foodMap);
 		model.addAttribute("predrink", drinkMap);
-		model.addAttribute("prealcohol", alcoholMap); 
+		model.addAttribute("prealcohol", alcoholMap);
 		model.addAttribute("total", total);
 		
 		return "cart";
+	}
+	
+	@PostMapping("/cart")
+	public String checkout() {
+		return "redirect:/history";
+	
 	}
 
 }

@@ -9,6 +9,7 @@
     <div th:replace="fragments/header :: header"></div>
     <link href="/css/preorder.css" rel="stylesheet">
 
+    <form action="#" th:action="@{/cart}" th:object="${total}" method="post">
     <h1 align="center">CART</h1>
 
     <div class="table-div">
@@ -20,7 +21,7 @@
         </tr>
 
         <tr th:if="${not #lists.isEmpty(tickets)}" th:each="t : ${tickets}">
-          <td colspan="2" th:text="${t.seat.theater.movieID.name + '  ' + t.seat.theater.date + '  SEAT ' + t.seat.seatNumber}"></td>
+          <td colspan="2" th:text="${t.seat.theater.movieID.name + '  ' + t.seat.theater.date + '  ' + t.seat.theater.time + '  SEAT ' + t.seat.seatNumber}"></td>
           <td type="number" th:text="1" onload="calculate()"></td>
           <td type="number" th:text="${#numbers.formatDecimal(t.seat.seatType.price,1,2,'POINT')}"></td>
 
@@ -58,6 +59,7 @@
     <div class="button-block">
             <button class="button" type="submit">CHECKOUT</button> <button class="button">Empty Cart</button>
     </div>
+    </form>
 
     <br>
     <div th:replace="fragments/footer :: footer"></div>
