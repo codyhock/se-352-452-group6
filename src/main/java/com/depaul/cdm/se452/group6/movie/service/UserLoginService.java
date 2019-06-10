@@ -2,6 +2,8 @@ package com.depaul.cdm.se452.group6.movie.service;
 
 import java.util.List;
 
+import com.depaul.cdm.se452.group6.movie.config.LogConfig;
+import com.depaul.cdm.se452.group6.movie.config.LogLevel;
 import org.springframework.stereotype.Service;
 
 import com.depaul.cdm.se452.group6.movie.entity.UserLogin;
@@ -11,9 +13,11 @@ import com.depaul.cdm.se452.group6.movie.finder.UserLoginRepository;
 public class UserLoginService {
 	
 	private UserLoginRepository userloginRepository;
-	
-	public UserLoginService(UserLoginRepository userloginRepository) {
+	private LogConfig logConfig;
+
+	public UserLoginService(UserLoginRepository userloginRepository, LogConfig logConfig) {
 		   this.userloginRepository = userloginRepository;
+		   this.logConfig = logConfig;
 	}
 	
 	public List<UserLogin> getUserLogins() {
@@ -38,7 +42,9 @@ public class UserLoginService {
 		userLogin.setUserId(userId);
 		userLogin.setUserName(userName);
 		userLogin.setPassword(password);
-		userloginRepository.save(userLogin);
+    if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
+      userloginRepository.save(userLogin);
+		}
 		
 		return userLogin;
 	}
