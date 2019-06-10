@@ -24,12 +24,22 @@
   background-color: #caddee;
   padding: 20px;
 }
-.main p{
+.main p {
   font-size: 25px;
   font-weight: bold;
   text-align: left;
 }
 
+.side p {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.side #info {
+  font-size: 17px;
+  color: red;
+  font-weight: normal; 
+}
 
 .upcoming1 {
   width: 250px;

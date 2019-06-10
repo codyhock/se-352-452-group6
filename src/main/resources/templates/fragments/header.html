@@ -13,21 +13,21 @@
   <body>
     <div th:fragment="header">
     	<div class="header">
-         <img src="../../static/images/tblogo.jpg" th:src="@{/images/tblogo.jpg}" alt="logo" width="90" height="80" style="float: left;">
+         <img src="../../static/images/tblogo.jpg" th:src="@{/images/tblogo.jpg}" alt="logo">
          <p>Where movie tickets come to you</p>
         </div>
 
     <div class="topnav">
-          <a href="../../movie-listings" class="movies">Movies</a>
+          <a th:href="@{/movie-listings}">Movies</a>
           <a href="#" class="reviews">Reviews</a>
-          <a th:href="@{/preorder/menu}" class="fooddrink">Food and Drink</a>
+          <a th:href="@{/preorder/menu}">Food and Drink</a>
           <div class="dropdown">
             <button class="dropbtn">My Account <i class="arrowdown"></i></button>
               <div class="dropdown-content">
-                <a href="../../profile">Profile</a>
-                <a href="#" class="cart">Cart</a>
+                <a th:href="@{/profile}">Profile</a>
+                <a th:href="@{/cart}" class="cart">Cart</a>
                 <a href="../../history">Order History</a>
-                <a href="../../static/index.html">Log Out</a>
+                <a th:href="@{/}">Log Out</a>
               </div>
           </div>
     	</div>

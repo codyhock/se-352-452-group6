@@ -52,6 +52,17 @@ public class UserService {
 		     }
 	 }
 	 
+	 public User findByUserId(long id) {
+		 try {
+			 User users = userRepository.findById(id);
+			 logService.logSuccess("test_user", "findByUserId " + id);
+			 return users;
+		 }   catch (Exception e) {
+		     logService.logError("test_user", "findByUserId " + id);
+		     return null;
+		     }
+	 }
+	 
 }
 
 
