@@ -12,13 +12,25 @@
     <div class="profile">
       <div class="side">
         <h2>User Info</h2>
-        <img src="../static/images/user.jpg" th:src="@{/images/user.jpg}" style="height:200px" alt="userimg">
+        <img src="../static/images/user.jpg" th:src="@{/images/user.jpg}" style="height:120px" alt="userimg">
 
-        <p>First Name</p> <br>
-        <p th:text="${firstname}"> <br>
+        <p>First Name</p> 
+        <p id="info" th:text="${firstname}"> <br>
 
-        <p>Last Name</p> <br>
-        <p th:text="${lastname}">
+        <p>Last Name</p> 
+        <p id="info" th:text="${lastname}">
+        
+        <p>E-mail</p> 
+        <p id="info" th:text="${email}"> 
+        
+        <p>Date of Birth</p> 
+        <p id="info" th:text="${dateOfBirth}"> 
+        
+        <p>Phone Number</p> 
+        <p id="info" th:text="${phoneNumber}"> 
+        
+        <p>User Type</p> 
+        <p id="info" th:text="${type}"> 
 
       </div>
 

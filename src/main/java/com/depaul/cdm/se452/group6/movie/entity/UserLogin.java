@@ -10,14 +10,14 @@ import lombok.Data;
 @Data 
 @Document(collection = "userlogins")
 public class UserLogin implements Serializable {
-	@Id
-    @GeneratedValue
-	private Long id;
+//	@Id
+//    @GeneratedValue
+//	private Long id;
+	
+	private Long userId;
 	
 	private String userName;
 	
 	private String password;
-	
-	private String userId;
 	
 }

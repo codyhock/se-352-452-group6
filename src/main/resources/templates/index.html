@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="utf-8">
       <title>Log In or Sign Up</title>
@@ -13,15 +13,27 @@
 
       <div class="topnav">
          <div class="login-container">
-            <form action="index.html">
-               <input type="text" placeholder="Username" name="username">
-               <input type="password" placeholder="Password" name="psw">
+           	<form action="#" th:action="@{/login}" th:object="${userLogin}" method="post">
+           	
+           	<div th:if="${param.error}">
+                    <div class="alert">
+                        Invalid username or password.
+                    </div>
+             </div>
+                <div th:if="${param.logout}">
+                    <div class="alert-info">
+                        You have been logged out.
+                    </div>
+                </div>
+           	
+               <input type="text" placeholder="Username" name="username" th:field="*{userName}">
+               <input type="password" placeholder="Password" name="psw" th:field="*{password}">
                <button type="submit">Login</button>
             </form>
             </div>
          </div>
 
-         <form action="index.html">
+        <!--  <form action="index.html"> -->
             <div class="container">
                <h2>Don't have an account?</h2>
                <p>Sign up below.</p>
@@ -61,7 +73,7 @@
                <p>By clicking sign up you agree to our <a href="#">Terms, Data and Cookies Policy</a>.</p>
                <button type="submit" class="registerbtn">Sign Up</button>
             </div>
-          </form>
+          <!-- </form> -->
                <div class="footer">
                   <p>Ticket Booth Group © 2019</p>
                   <p>Group members: Cody Hock, Connor Taylor, Neal Desai, Siriporn Phakamad, Marko Milosavljevic</p>

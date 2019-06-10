@@ -10,10 +10,8 @@ public interface UserLoginRepository extends CrudRepository<UserLogin, Long> {
 	
 	List<UserLogin> findAll();
 	
-	List<UserLogin> findById (String id);
-	
 	List<UserLogin> findByUserName (String userName);
 	
-	List<UserLogin> findByUserId (String userId);
+	UserLogin findByUserId (Long userId);
 
 }
