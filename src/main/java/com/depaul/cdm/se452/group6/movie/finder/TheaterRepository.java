@@ -1,5 +1,6 @@
 package com.depaul.cdm.se452.group6.movie.finder;
 
+import com.depaul.cdm.se452.group6.movie.entity.Movie;
 import com.depaul.cdm.se452.group6.movie.entity.Theater;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,6 +14,7 @@ public interface TheaterRepository extends CrudRepository<Theater, Long> {
   List<Theater> findByTheaterAndDate (int theater, LocalDate date);
   List<Theater> findByTheaterAndDateAndTime (int theater, LocalDate date, LocalTime time);
   List<Theater> findByDate (LocalDate date);
+  List<Theater> findByDateAndMovieID (LocalDate date, Movie movie);
 
   Optional<Theater> findById(Long id);
 

@@ -14,12 +14,19 @@
             <p th:text="${movie.rating}"></p>
             <p th:text="${movie.runtime} + ' minutes'"></p>
             <p th:text="${movie.genre}"></p>
-            <p th:text="${currentRating} + ' / 5'"></p>
+            <p th:text="'Rating: ' + ${avgRating} + ' / 5'"></p>
+            <!--<p th:text="${test}"></p>-->
+            <span id="times" th:each="theater : ${theaters}">
+                <form action="#" th:action="@{${'/theater/' + theater.id + '/seats'}}">
+                    <button class="button" type="submit" th:text="${theater.time} + ' ' + ${theater.theaterType.type}"></button>
+                </form>
+            </span>
         </div>
     </div>
     <div class="review">
         <form action="#" th:action="@{${'/reviews/movie/' + movie.id + '/addReview'}}" th:object="${newReview}" method="post">
-            <textarea th:field="*{comment}" id="comment" placeholder="Leave review here." style="width:500px; height:50px;"></textarea><br>
+            <h4>Leave review here.</h4><br>
+            <textarea th:field="*{comment}" id="comment" style="width:50%; height:100px;"></textarea><br>
             <span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Must not be blank.</span>
             <h4>Rating</h4><br>
             <input type="radio" th:field="*{rating}" value="1"> 1
@@ -27,13 +34,16 @@
             <input type="radio" th:field="*{rating}" value="3"> 3
             <input type="radio" th:field="*{rating}" value="4"> 4
             <input type="radio" th:field="*{rating}" value="5"> 5<br>
-            <button type="submit">Submit Review</button>
+            <button class="button" type="submit">Submit Review</button>
         </form>
     </div>
     <div class="card" th:each="review : ${reviews}">
         <h4 th:text="${review.userName}"></h4>
-        <p th:text="${review.rating}"></p>
-        <p th:text="${review.comment}"></p>
+        <p th:text="'Rating: ' + ${review.rating} + ' / 5'"></p>
+        <hr class="hr">
+        <div class="comment">
+            <p th:text="${review.comment}"></p>
+        </div>
     </div>
 </div>
 

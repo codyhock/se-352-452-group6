@@ -1,11 +1,15 @@
 package com.depaul.cdm.se452.group6.movie.controller;
 
 import com.depaul.cdm.se452.group6.movie.entity.Theater;
+import com.depaul.cdm.se452.group6.movie.model.Theaters;
 import com.depaul.cdm.se452.group6.movie.service.TheaterService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,8 +30,8 @@ public class TheaterController {
     Date hardcoded for initial view as we would have to populate tables for many
     future dates to display current date availability
      */
-    List<Theater> theaters = theaterService.getTheatersByDate(LocalDate.of(2019, 4, 13));
-    model.addAttribute("theaters", theaters);
+    LocalDate date = LocalDate.of(2019,4,13);
+    List<Theater> theaters = theaterService.getTheatersByDate(date);
     HashMap<String, ArrayList<Theater>> movies = new HashMap<>();
     for (Theater theater: theaters) {
         String name = theater.getMovieID().getName();
@@ -39,8 +43,18 @@ public class TheaterController {
           movies.get(name).add(theater);
         }
       }
-
     model.addAttribute("movies", movies);
+
+    model.addAttribute("theaters", new Theaters());
     return "movies";
+  }
+
+  @PostMapping("/movies/{id}/addReview")
+  public String reviewRedirect(@ModelAttribute("theaters") Theaters theaters, @PathVariable Long id,
+                               Model model, BindingResult result, HttpServletRequest request) {
+
+    HttpSession session = request.getSession(true);
+    session.setAttribute("theaters", theaters.getTheaters());
+    return "redirect:/reviews/movie/" + id;
   }
 }

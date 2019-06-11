@@ -24,7 +24,11 @@
             <p th:text="${movie.value[0].movieID.rating}"></p>
             <p th:text="${movie.value[0].movieID.runtime} + ' minutes'"></p>
             <p th:text="${movie.value[0].movieID.genre}"></p>
-            <form action="#" th:action="@{${'/reviews/movie/' + movie.value[0].movieID.id}}">
+            <!--<form action="#" th:action="@{${'/reviews/movie/' + movie.value[0].movieID.id}}">-->
+            <form action="#" th:action="@{${'/movies/' + movie.value[0].movieID.id + '/addReview'}}" th:object="${test}" method="post">
+                <span th:each="theater : ${movie.value}">
+                    <input type="hidden" id="theaters" name="theaters" th:value="${theater.id}">
+                </span>
                 <button class="button" type="submit">Info</button>
             </form><br>
             <span id="times" th:each="theater : ${movie.value}">
