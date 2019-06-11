@@ -14,7 +14,13 @@
             <p th:text="${movie.rating}"></p>
             <p th:text="${movie.runtime} + ' minutes'"></p>
             <p th:text="${movie.genre}"></p>
-            <p th:text="'Rating: ' + ${currentRating} + ' / 5'"></p>
+            <p th:text="'Rating: ' + ${avgRating} + ' / 5'"></p>
+            <!--<p th:text="${test}"></p>-->
+            <span id="times" th:each="theater : ${theaters}">
+                <form action="#" th:action="@{${'/theater/' + theater.id + '/seats'}}">
+                    <button class="button" type="submit" th:text="${theater.time} + ' ' + ${theater.theaterType.type}"></button>
+                </form>
+            </span>
         </div>
     </div>
     <div class="review">

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Document(collection = "reviews")
@@ -26,5 +27,6 @@ public class MovieReview implements Serializable {
   private int rating;
 
   @NotNull
+  @Size(min=2)
   private String comment;
 }

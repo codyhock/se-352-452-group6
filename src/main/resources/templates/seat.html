@@ -9,6 +9,7 @@
 
         <div th:replace="fragments/header :: header"></div>
         <link rel="stylesheet" href="/css/seatstyle.css">
+        <script type="text/javascript" th:src="@{/js/seats.js}" src="/js/seats.js"></script>
         <div class="seats">
             <div class="side">
                 <div style="float: left;">
@@ -73,7 +74,7 @@
                                 <span th:case="'Handicap'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
+                                            <input type="checkbox" onchange="checkSeats()" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}" ><img src="../static/images/handicap.ico" th:src="@{/images/handicap.ico}" alt="handicap"></label>
                                         </span>
                                         <span th:case="*">
@@ -93,7 +94,7 @@
                                 <span th:case="'Standard'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
+                                            <input type="checkbox" onchange="checkSeats()" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/standard.ico" th:src="@{/images/standard.ico}" alt="standard"></label>
                                         </span>
                                         <span th:case="*">
@@ -113,7 +114,7 @@
                                 <span th:case="'Recliner'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
+                                            <input type="checkbox" onchange="checkSeats()" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/recliner.ico" th:src="@{/images/recliner.ico}" alt="recliner"></label>
                                         </span>
                                         <span th:case="*">
@@ -133,7 +134,7 @@
                                 <span th:case="'Loveseat'" style="padding: 10px;">
                                     <span th:switch="${seat.availability}">
                                         <span th:case="'Available'">
-                                            <input type="checkbox" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
+                                            <input type="checkbox" onchange="checkSeats()" th:id="${seat.id}" th:field="*{selectedSeats}" th:value="${seat.id}"/>
                                             <label th:for="${seat.id}"><img src="../static/images/loveseat.ico" th:src="@{/images/loveseat.ico}" alt="loveseat"></label>
                                         </span>
                                         <span th:case="*">
@@ -149,7 +150,7 @@
                     <br>
                     <br>
                     <div class="button-block">
-                        <button class="button" type="submit" name="submit">Add to Cart</button>
+                        <input class="button" type="submit" name="submit" value="Add to Cart" disabled>
                     </div>
                 </form>
             </div>

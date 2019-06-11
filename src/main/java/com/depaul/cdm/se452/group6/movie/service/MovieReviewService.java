@@ -11,16 +11,20 @@ import java.util.List;
 public class MovieReviewService {
 
   private MovieReviewRepository movieReviewRepository;
+  private LogService logService;
 
-  public MovieReviewService (MovieReviewRepository movieReviewRepository) {
+  public MovieReviewService (MovieReviewRepository movieReviewRepository, LogService logService) {
     this.movieReviewRepository = movieReviewRepository;
+    this.logService = logService;
   }
 
   public List<MovieReview> getReviews() {
     try {
       List<MovieReview> reviews = movieReviewRepository.findAll();
+      logService.logSuccess("testUser" , "got all reviews");
       return reviews;
     } catch (Exception e) {
+      logService.logError("testUser", "error getting all reviews");
       return null;
     }
   }
@@ -28,8 +32,10 @@ public class MovieReviewService {
   public List<MovieReview> getReviewsByMovie(Long id) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findByMovieID(id);
+      logService.logSuccess("testUser" , "got reviews by movieid" + id);
       return reviews;
     } catch (Exception e) {
+      logService.logError("testUser", "error getting reviews by movieid" + id);
       return null;
     }
   }
@@ -37,8 +43,10 @@ public class MovieReviewService {
   public List<MovieReview> getReviewsByUserID(Long id) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findByUserID(id);
+      logService.logSuccess("testUser" , "got reviews by userid" + id);
       return reviews;
     } catch (Exception e) {
+      logService.logError("testUser", "error getting reviews by userid" + id);
       return null;
     }
   }
