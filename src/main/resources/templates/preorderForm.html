@@ -31,7 +31,7 @@
             <td class="food-data" th:text="${f.size}"></td>
             <td class="food-data" th:text="${#numbers.formatDecimal(f.price,1,2,'POINT')}"></td>
             <td class="food-quantity">
-              <input type="number" min="0" value="0" th:field="*{foodCart[__${f.id}__]}" placeholder="e.g. 0">
+              <input type="number" min="0" value="0" th:field="*{foodCart[__${f.id}__]}" placeholder="e.g. 0" required>
             </td>
           </tr>
 
@@ -54,7 +54,7 @@
             <td class="drink-data" th:text="${d.size}"></td>
             <td class="drink-data" th:text="${#numbers.formatDecimal(d.price,1,2,'POINT')}"></td>
             <td class="drink-quantity">
-              <input type="number" min="0" value="0" th:field="*{drinkCart[__${d.id}__]}" placeholder="e.g. 0">
+              <input type="number" min="0" value="0" th:field="*{drinkCart[__${d.id}__]}" placeholder="e.g. 0" required>
             </td>
           </tr>
 
@@ -75,7 +75,7 @@
             <td class="alcohol-data" th:text="${al.type}"></td>
             <td class="alcohol-data" th:text="${#numbers.formatDecimal(al.price,1,2,'POINT')}"></td>
             <td class="alcohol-quantity">
-              <input type="number" min="0" value="0" th:field="*{alcoholCart[__${al.id}__]}" placeholder="e.g. 0">
+              <input type="number" min="0" value="0" th:field="*{alcoholCart[__${al.id}__]}" placeholder="e.g. 0" required>
             </td>
           </tr>
 
