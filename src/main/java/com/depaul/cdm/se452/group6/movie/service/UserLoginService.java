@@ -42,9 +42,10 @@ public class UserLoginService {
 		userLogin.setUserId(userId);
 		userLogin.setUserName(userName);
 		userLogin.setPassword(password);
-    if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
-      userloginRepository.save(userLogin);
-		}
+//    if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
+//      userloginRepository.save(userLogin);
+//		}
+        userloginRepository.save(userLogin);
 		
 		return userLogin;
 	}

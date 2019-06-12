@@ -1,5 +1,4 @@
 package com.depaul.cdm.se452.group6.movie.controller;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,7 @@ public class IndexController {
 	
 	@GetMapping("/")
     public String root(Model model) {
-		userLoginService.loginSuccess(1L, "admin", "1234");
+		//userLoginService.loginSuccess(1L, "admin", "1234");
 		model.addAttribute("userLogin", new UserLogin());
 		model.addAttribute("newUser", new User());
         return "index";
