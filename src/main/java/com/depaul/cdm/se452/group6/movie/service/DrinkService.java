@@ -17,46 +17,46 @@ public class DrinkService {
 		this.logService = logService;
 	}
 	
-	public List<Drink> getAllDrinks() {
+	public List<Drink> getAllDrinks(Long userId) {
 		try {
 			List<Drink> listOfFood = drinkRepository.findAll();
-			logService.logSuccess("test_user", "getDrink");
+			logService.logSuccess(userId, "getDrink");
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getDrink");
+			logService.logError(userId, "getDrink");
 			return null;
 		}
 	}
 	
-	public List<Drink> getDrinkByItem(String item) {
+	public List<Drink> getDrinkByItem(String item, Long userId) {
 		try {
 			List<Drink> listOfFood = drinkRepository.findByItem(item);
-			logService.logSuccess("test_user", "getDrinkByItem " + item);
+			logService.logSuccess(userId, "getDrinkByItem " + item);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getDrinkByItem " + item);
+			logService.logError(userId, "getDrinkByItem " + item);
 			return null;
 		}
 	}
 
-	public List<Drink> getDrinkByItemAndSize(String item, String size) {
+	public List<Drink> getDrinkByItemAndSize(String item, String size, Long userId) {
 		try {
 			List<Drink> listOfFood = drinkRepository.findByItem(item);
-			logService.logSuccess("test_user", "getDrinkByItemAndSize " + item + ", " + size);
+			logService.logSuccess(userId, "getDrinkByItemAndSize " + item + ", " + size);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getDrinkByItemAndSize " + item + ", " + size);
+			logService.logError(userId, "getDrinkByItemAndSize " + item + ", " + size);
 			return null;
 		}
 	}
 	
-	public Drink getDrinkById(long id) {
+	public Drink getDrinkById(long id, Long userId) {
 		try {
 			Drink drink = drinkRepository.findById(id);
-			logService.logSuccess("test_user", "getDrinkByDrinkId " + id);
+			logService.logSuccess(userId, "getDrinkByDrinkId " + id);
 			return drink;
 		} catch (Exception e) {
-			logService.logError("test_user", "getDrinkByDrinkId " + id);
+			logService.logError(userId, "getDrinkByDrinkId " + id);
 			return null;
 		}
 	}

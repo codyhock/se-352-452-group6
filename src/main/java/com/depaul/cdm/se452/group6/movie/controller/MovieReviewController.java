@@ -42,7 +42,7 @@ public class MovieReviewController {
   public String getByTheater(@PathVariable long movieId, Model model,
                              @SessionAttribute(name="theaters") Long[] theaterIDs, @SessionAttribute(name="userID") Long userID) {
 
-    List<MovieReview> reviews = movieReviewService.getReviewsByMovie(movieId);
+    List<MovieReview> reviews = movieReviewService.getReviewsByMovie(movieId, userID);
     Movie movie = movieRepository.findById(movieId);
     double ratingSum = 0;
     for (MovieReview review: reviews) {
@@ -54,7 +54,7 @@ public class MovieReviewController {
 
     List<Theater> theaters = new ArrayList<Theater>();
     for (Long theaterID : theaterIDs) {
-      theaters.add(theaterService.getById(theaterID));
+      theaters.add(theaterService.getById(theaterID, userID));
     }
 
     String avgRating = String.format("%.2f", ratingSum);
@@ -74,7 +74,7 @@ public class MovieReviewController {
       return "redirect:/reviews/movie/" + movieId;
     }
 
-    String firstname = userService.findByUserId(userID).getFirstname();
+    String firstname = userService.findByUserId(userID, userID).getFirstname();
 
     newReview.setUserID(userID); //Hardcoded for now
     newReview.setUserName(firstname); //Hardcoded for now}

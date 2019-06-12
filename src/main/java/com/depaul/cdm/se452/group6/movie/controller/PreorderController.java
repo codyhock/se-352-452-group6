@@ -38,17 +38,17 @@ public class PreorderController implements WebMvcConfigurer {
 
 	@GetMapping("/menu")
     public String showMenu(Model model, @SessionAttribute(name="userID") Long userID) {
-    	model.addAttribute("food", foodService.getAllFood());
-    	model.addAttribute("drinks", drinkService.getAllDrinks());
-    	model.addAttribute("alcohol", alcoholService.getAllAlcohol());
+    	model.addAttribute("food", foodService.getAllFood(userID));
+    	model.addAttribute("drinks", drinkService.getAllDrinks(userID));
+    	model.addAttribute("alcohol", alcoholService.getAllAlcohol(userID));
         return "preorderMenu";
     }
     
 	@GetMapping("/form")
     public String showForm(Model model, @SessionAttribute(name="userID") Long userID) {
-    	model.addAttribute("listOfFood", foodService.getAllFood());
-    	model.addAttribute("listOfDrinks", drinkService.getAllDrinks());
-    	model.addAttribute("listOfAlcohol", alcoholService.getAllAlcohol());
+    	model.addAttribute("listOfFood", foodService.getAllFood(userID));
+    	model.addAttribute("listOfDrinks", drinkService.getAllDrinks(userID));
+    	model.addAttribute("listOfAlcohol", alcoholService.getAllAlcohol(userID));
     	//model.addAttribute("cart", new Cart());
 			//model.addAttribute("cart", cartService.getCartByUserId(userID).get(0));
 			model.addAttribute("cart", new PreOrder());

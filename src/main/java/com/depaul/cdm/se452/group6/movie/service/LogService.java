@@ -26,10 +26,10 @@ public class LogService {
     return logRepository.findAll();
   }
 
-  public Log logSuccess(String uName, String action) {
+  public Log logSuccess(Long userId, String action) {
     Log log = new Log();
     if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
-      log.setUserName(uName);
+      log.setUserId(userId);
       log.setAction(action);
       log.setResult("Success");
       log.setTimeStamp(new Date());
@@ -38,10 +38,10 @@ public class LogService {
     return log;
   }
 
-  public Log logError(String uName, String action) {
+  public Log logError(Long userId, String action) {
     Log log = new Log();
     if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
-      log.setUserName(uName);
+      log.setUserId(userId);
       log.setAction(action);
       log.setResult("ERROR");
       log.setTimeStamp(new Date());

@@ -18,35 +18,35 @@ public class MovieReviewService {
     this.logService = logService;
   }
 
-  public List<MovieReview> getReviews() {
+  public List<MovieReview> getReviews(Long userId) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findAll();
-      logService.logSuccess("testUser" , "got all reviews");
+      logService.logSuccess(userId , "got all reviews");
       return reviews;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting all reviews");
+      logService.logError(userId, "error getting all reviews");
       return null;
     }
   }
 
-  public List<MovieReview> getReviewsByMovie(Long id) {
+  public List<MovieReview> getReviewsByMovie(Long id, Long userId) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findByMovieID(id);
-      logService.logSuccess("testUser" , "got reviews by movieid" + id);
+      logService.logSuccess(userId, "got reviews by movieid" + id);
       return reviews;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting reviews by movieid" + id);
+      logService.logError(userId, "error getting reviews by movieid" + id);
       return null;
     }
   }
 
-  public List<MovieReview> getReviewsByUserID(Long id) {
+  public List<MovieReview> getReviewsByUserID(Long id, Long userId) {
     try {
       List<MovieReview> reviews = movieReviewRepository.findByUserID(id);
-      logService.logSuccess("testUser" , "got reviews by userid" + id);
+      logService.logSuccess(userId , "got reviews by userid" + id);
       return reviews;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting reviews by userid" + id);
+      logService.logError(userId, "error getting reviews by userid" + id);
       return null;
     }
   }

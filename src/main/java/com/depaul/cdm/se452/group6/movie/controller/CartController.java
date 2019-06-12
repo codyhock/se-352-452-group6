@@ -55,7 +55,7 @@ public class CartController {
 			// store list of tickets in the list and total ticketprice 
 			if (!cart.getTicketCart().isEmpty()) {
 				for (Long tid : cart.getTicketCart()) {
-					for (Ticket ticket : ticketService.findTicketsByid(tid)) {
+					for (Ticket ticket : ticketService.findTicketsByid(tid, userID)) {
 						ticketList.add(ticket);
 						Double price = ticket.getSeat().getSeatType().getPrice();
 						ticketPrice += price;
@@ -67,7 +67,7 @@ public class CartController {
 			// store food/quantity in map and total foodprice 
 			if (!cart.getFoodCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getFoodCart().entrySet()) {
-					Food food = foodService.getFoodById(e.getKey());
+					Food food = foodService.getFoodById(e.getKey(), userID);
 					
 					if (foodMap.equals(null) || !foodMap.containsKey(food)) {
 						foodMap.put(food, e.getValue());
@@ -82,7 +82,7 @@ public class CartController {
 			// store drink/quantity in map and total drinkprice 
 			if (!cart.getDrinkCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getDrinkCart().entrySet()) { 
-					Drink drink = drinkService.getDrinkById(e.getKey());
+					Drink drink = drinkService.getDrinkById(e.getKey(), userID);
 					
 					if (drinkMap.equals(null) || !drinkMap.containsKey(drink)) {
 						drinkMap.put(drink, e.getValue());
@@ -97,7 +97,7 @@ public class CartController {
 			// store alcohol/quantity in map and total alcoholprice 
 			if (!cart.getAlcoholCart().isEmpty()) {
 				for (Map.Entry<Long,Integer> e : cart.getAlcoholCart().entrySet()) { 
-					AlcoholItem alcohol = alcoholService.getAlcoholById(e.getKey());
+					AlcoholItem alcohol = alcoholService.getAlcoholById(e.getKey(), userID);
 					
 					if (alcoholMap.equals(null) || !alcoholMap.containsKey(alcohol)) {
 						alcoholMap.put(alcohol, e.getValue());
@@ -105,7 +105,7 @@ public class CartController {
 						alcoholMap.replace(alcohol, e.getValue() + alcoholMap.get(alcohol));
 					}
 					
-			    	alcoholPrice += alcoholService.getAlcoholById(e.getKey()).getPrice() * e.getValue();
+			    	alcoholPrice += alcoholService.getAlcoholById(e.getKey(), userID).getPrice() * e.getValue();
 				} 
 			}
 		}
@@ -133,10 +133,10 @@ public class CartController {
 			Cart cart = cartService.getCartByUserId(userID).get(0);
 
 			for (Long ticket : cart.getTicketCart()) {
-				Ticket t = ticketService.findTicketsByid(ticket).get(0);
+				Ticket t = ticketService.findTicketsByid(ticket, userID).get(0);
 				Seat s = t.getSeat();
 				s.setAvailability("Available");
-				seatService.updateSeat(s);
+				seatService.updateSeat(s, userID);
 				ticketService.deleteTicket(t);
 			}
 			cartService.deleteCart(cart);

@@ -31,7 +31,7 @@ public class TheaterController {
     future dates to display current date availability
      */
     LocalDate date = LocalDate.of(2019,4,13);
-    List<Theater> theaters = theaterService.getTheatersByDate(date);
+    List<Theater> theaters = theaterService.getTheatersByDate(date, userID);
     HashMap<String, ArrayList<Theater>> movies = new HashMap<>();
     for (Theater theater: theaters) {
         String name = theater.getMovieID().getName();

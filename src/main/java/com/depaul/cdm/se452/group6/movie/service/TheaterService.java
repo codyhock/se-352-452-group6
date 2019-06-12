@@ -20,46 +20,46 @@ public class TheaterService {
     this.movieService = movieService;
   }
 
-  public Theater getById(Long id) {
+  public Theater getById(Long id, Long userId) {
     try {
       Theater theater = theaterRepository.findById(id).get();
-      logService.logSuccess("testUser" , "got theater by id " + id);
+      logService.logSuccess(userId , "got theater by id " + id);
       return theater;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting theater " + id);
+      logService.logError(userId, "error getting theater " + id);
       return null;
     }
   }
 
-  public List<Theater> getByDateAndMovieID(LocalDate date, Movie movie) {
+  public List<Theater> getByDateAndMovieID(LocalDate date, Movie movie, Long userId) {
     try {
       List<Theater> theaters = theaterRepository.findByDateAndMovieID(date, movie);
-      logService.logSuccess("testUser" , "got theater by date and movieid " + movie.getId());
+      logService.logSuccess(userId, "got theater by date and movieid " + movie.getId());
       return theaters;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting theater by date and movieid " + movie.getId());
+      logService.logError(userId, "error getting theater by date and movieid " + movie.getId());
       return null;
     }
   }
 
-  public List<Theater> getTheaters() {
+  public List<Theater> getTheaters(Long userId) {
     try {
       List<Theater> theaters = theaterRepository.findAll();
-      logService.logSuccess("testUser" , "got theaters");
+      logService.logSuccess(userId , "got theaters");
       return theaters;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting theaters ");
+      logService.logError(userId, "error getting theaters ");
       return null;
     }
   }
 
-  public List<Theater> getTheatersByDate(LocalDate date) {
+  public List<Theater> getTheatersByDate(LocalDate date, Long userId) {
     try {
       List<Theater> theaters = theaterRepository.findByDate(date);
-      logService.logSuccess("testUser" , "got theater by date");
+      logService.logSuccess(userId , "got theater by date");
       return theaters;
     } catch (Exception e) {
-      logService.logError("testUser", "error getting theater by date ");
+      logService.logError(userId, "error getting theater by date ");
       return null;
     }
   }
