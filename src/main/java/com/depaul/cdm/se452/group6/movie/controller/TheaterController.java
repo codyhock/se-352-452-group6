@@ -25,7 +25,7 @@ public class TheaterController {
   }
 
   @GetMapping("movie-listings")
-  public String getMoviesByDate(Model model) {
+  public String getMoviesByDate(Model model, @SessionAttribute(name="userID") Long userID) {
     /*
     Date hardcoded for initial view as we would have to populate tables for many
     future dates to display current date availability
@@ -53,7 +53,8 @@ public class TheaterController {
   public String reviewRedirect(@ModelAttribute("theaters") Theaters theaters, @PathVariable Long id,
                                Model model, BindingResult result, HttpServletRequest request) {
 
-    HttpSession session = request.getSession(true);
+    //HttpSession session = request.getSession(true);
+    HttpSession session = request.getSession();
     session.setAttribute("theaters", theaters.getTheaters());
     return "redirect:/reviews/movie/" + id;
   }

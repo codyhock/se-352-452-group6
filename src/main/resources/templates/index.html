@@ -47,10 +47,10 @@
                <input type="text" placeholder="Email" name="email" th:field="*{email}" id="a2" required/><br>
 
                <label for="phonenum"><b>Enter Your Phone Number</b></label><br>
-               <input type="text" placeholder="Phone Number e.g. 123-456-7890" name="phonenum" th:field="*{phoneNumber}" id="a2" required><br>
+               <input type="text" placeholder="Phone Number e.g. 123-456-7890" name="phonenum" th:field="*{phonenumber}" id="a2" required><br>
 
                <label for="dob"><b>Enter Your Date of Birth</b></label><br>
-               <input type="text" placeholder="Date of Birth e.g. 1990-05-05" name="dob" th:field="*{dateOfBirth}" id="a2" required/><br>
+               <input type="date" placeholder="Date of Birth e.g. 1990-05-05" name="dob" th:field="*{dateofbirth}" id="a2" required/><br>
                
                <label for="psw"><b>Create Your Username</b></label><br>
                <input type="text" placeholder="Username" name="psw" th:field="${userLogin.userName}" id="a2" required><br>
@@ -58,13 +58,13 @@
                <label for="psw"><b>Create Your Password</b></label><br>
                <input type="password" placeholder="Password" name="psw" th:field="${userLogin.password}" id="a2" required><br>
 	 			<label for="psw"><b>Select Your Account Type</b></label><br><br>
-                 	<input type="radio" name="usertype1" value="one" id="radio-one" class="form-radio" checked>
-               		<label for="radio-one">Guest</label>
-               		<input type="radio" name="usertype1" value="one" id="radio-two" class="form-radio">
+                 	<input type="radio" name="usertype1" th:field="*{usertypeid}" value="Standard" id="radio-one" class="form-radio" checked>
+               		<label for="radio-one">Standard</label>
+               		<input type="radio" name="usertype1" th:field="*{usertypeid}" value="Premium" id="radio-two" class="form-radio">
            			<label for="radio-one">Premium</label>
-               		<input type="radio" name="usertype1" value="one" id="radio-three" class="form-radio">
+               		<input type="radio" name="usertype1" th:field="*{usertypeid}" value="Gold" id="radio-three" class="form-radio">
                		<label for="radio-one">Gold</label>
-               		<input type="radio" name="usertype1" value="one" id="radio-four" class="form-radio">
+               		<input type="radio" name="usertype1" th:field="*{usertypeid}" value="VIP" id="radio-four" class="form-radio">
                		<label for="radio-one">VIP</label><br><br> 
 
                <hr>

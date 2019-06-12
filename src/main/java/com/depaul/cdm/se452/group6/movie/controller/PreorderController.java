@@ -5,13 +5,11 @@ import java.util.Iterator;
 
 import javax.validation.Valid;
 
+import com.depaul.cdm.se452.group6.movie.model.PreOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.depaul.cdm.se452.group6.movie.entity.Cart;
@@ -39,7 +37,7 @@ public class PreorderController implements WebMvcConfigurer {
 	}
 
 	@GetMapping("/menu")
-    public String showMenu(Model model) {
+    public String showMenu(Model model, @SessionAttribute(name="userID") Long userID) {
     	model.addAttribute("food", foodService.getAllFood());
     	model.addAttribute("drinks", drinkService.getAllDrinks());
     	model.addAttribute("alcohol", alcoholService.getAllAlcohol());
@@ -47,16 +45,20 @@ public class PreorderController implements WebMvcConfigurer {
     }
     
 	@GetMapping("/form")
-    public String showForm(Model model) {
+    public String showForm(Model model, @SessionAttribute(name="userID") Long userID) {
     	model.addAttribute("listOfFood", foodService.getAllFood());
     	model.addAttribute("listOfDrinks", drinkService.getAllDrinks());
     	model.addAttribute("listOfAlcohol", alcoholService.getAllAlcohol());
-    	model.addAttribute("cart", new Cart());
+    	//model.addAttribute("cart", new Cart());
+			//model.addAttribute("cart", cartService.getCartByUserId(userID).get(0));
+			model.addAttribute("cart", new PreOrder());
     	return "preorderForm";
     }
 	
 	@PostMapping("/form")
-	public String saveForm(@Valid @ModelAttribute("cart") Cart cart, BindingResult result) {
+	public String saveForm(@Valid @ModelAttribute("cart") PreOrder cart, BindingResult result,
+												 @SessionAttribute(name="userID") Long userID) {
+
 	    if (result.hasErrors()) {
 	        return "redirect:/preorder/form";
 	    }
@@ -83,11 +85,13 @@ public class PreorderController implements WebMvcConfigurer {
 			if (tmp.equals(0)) {
 				iterateAlcohol.remove();
 			}
-		} 
-		
-		cartService.cartSuccess(1L, new ArrayList<Long>()
-				, cart.getFoodCart(), cart.getDrinkCart(), cart.getAlcoholCart());
-		
+		}
+
+		Cart currentCart = cartService.getCartByUserId(userID).get(0);
+		currentCart.setFoodCart(cart.getFoodCart());
+		currentCart.setDrinkCart(cart.getDrinkCart());
+		currentCart.setAlcoholCart(cart.getAlcoholCart());
+		cartService.cartSuccess(currentCart);
 
 		return "redirect:/cart";
 	}

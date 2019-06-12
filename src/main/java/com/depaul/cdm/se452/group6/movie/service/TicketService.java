@@ -58,6 +58,10 @@ public class TicketService {
 		     return null;
 		     }
 	}
+
+	public void deleteTicket(Ticket ticket) {
+		ticketRepository.delete(ticket);
+	}
 	
 	public List<Ticket> findTicketsByUser(Seat seat) {
 		 try {

@@ -17,13 +17,13 @@ public class ProfileController {
   
 
   @GetMapping("/profile")
-  public String showUser(Long id, Model model) {
-      model.addAttribute("firstname", userService.findByUserId(1L).getFirstname());
-      model.addAttribute("lastname", userService.findByUserId(1L).getLastname());
-      model.addAttribute("email", userService.findByUserId(1L).getEmail());
-      model.addAttribute("dateOfBirth", userService.findByUserId(1L).getDateOfBirth());
-      model.addAttribute("phoneNumber", userService.findByUserId(1L).getPhoneNumber());
-      model.addAttribute("type", userService.findByUserId(1L).getUsertype().getType());
+  public String showUser(Long id, Model model, @SessionAttribute(name="userID") Long userID) {
+      model.addAttribute("firstname", userService.findByUserId(userID).getFirstname());
+      model.addAttribute("lastname", userService.findByUserId(userID).getLastname());
+      model.addAttribute("email", userService.findByUserId(userID).getEmail());
+      model.addAttribute("dateOfBirth", userService.findByUserId(userID).getDateofbirth());
+      model.addAttribute("phoneNumber", userService.findByUserId(userID).getPhonenumber());
+      model.addAttribute("type", userService.findByUserId(userID).getUsertype().getType());
       return "profile";
   }
   

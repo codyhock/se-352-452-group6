@@ -36,18 +36,9 @@ public class UserLoginService {
 		return userlogins;
 
 	 }
-	
-	public UserLogin loginSuccess(Long userId, String userName, String password) {
-		UserLogin userLogin = new UserLogin();
-		userLogin.setUserId(userId);
-		userLogin.setUserName(userName);
-		userLogin.setPassword(password);
-//    if (LogLevel.valueOf(logConfig.getLevel()).equals(LogLevel.DEBUG)) {
-//      userloginRepository.save(userLogin);
-//		}
+
+	public void registerUser(UserLogin userLogin) {
         userloginRepository.save(userLogin);
-		
-		return userLogin;
 	}
 
 }

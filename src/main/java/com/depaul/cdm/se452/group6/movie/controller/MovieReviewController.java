@@ -9,6 +9,7 @@ import com.depaul.cdm.se452.group6.movie.finder.MovieReviewRepository;
 import com.depaul.cdm.se452.group6.movie.service.MovieReviewService;
 import com.depaul.cdm.se452.group6.movie.service.TheaterService;
 import com.depaul.cdm.se452.group6.movie.service.UserLoginService;
+import com.depaul.cdm.se452.group6.movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,19 +25,22 @@ public class MovieReviewController {
   private MovieRepository movieRepository;
   private MovieReviewRepository movieReviewRepository;
   private TheaterService theaterService;
+  private UserService userService;
 
   public MovieReviewController (MovieReviewService movieReviewService, MovieRepository movieRepository,
-                                MovieReviewRepository movieReviewRepository, TheaterService theaterService) {
+                                MovieReviewRepository movieReviewRepository, TheaterService theaterService,
+                                UserService userService) {
 
     this.movieReviewService = movieReviewService;
     this.movieRepository = movieRepository;
     this.movieReviewRepository = movieReviewRepository;
     this.theaterService = theaterService;
+    this.userService = userService;
   }
 
   @GetMapping("reviews/movie/{movieId}")
   public String getByTheater(@PathVariable long movieId, Model model,
-                             @SessionAttribute(name="theaters") Long[] theaterIDs) {
+                             @SessionAttribute(name="theaters") Long[] theaterIDs, @SessionAttribute(name="userID") Long userID) {
 
     List<MovieReview> reviews = movieReviewService.getReviewsByMovie(movieId);
     Movie movie = movieRepository.findById(movieId);
@@ -63,13 +67,17 @@ public class MovieReviewController {
   }
 
   @PostMapping("reviews/movie/{movieId}/addReview")
-  public String addReview(@PathVariable long movieId, @Valid MovieReview newReview, BindingResult result) {
+  public String addReview(@PathVariable long movieId, @Valid MovieReview newReview, BindingResult result,
+                          @SessionAttribute(name="userID") Long userID) {
+
     if (result.hasErrors()) {
       return "redirect:/reviews/movie/" + movieId;
     }
 
-    newReview.setUserID(1L); //Hardcoded for now
-    newReview.setUserName("admin"); //Hardcoded for now}
+    String firstname = userService.findByUserId(userID).getFirstname();
+
+    newReview.setUserID(userID); //Hardcoded for now
+    newReview.setUserName(firstname); //Hardcoded for now}
     newReview.setMovieID(movieId);
     movieReviewRepository.save(newReview);
     return "redirect:/reviews/movie/" + movieId;

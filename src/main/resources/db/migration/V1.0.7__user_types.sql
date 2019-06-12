@@ -4,7 +4,7 @@ create table user_types (
 );
 
 insert into user_types (type) VALUES
-  ('Guest'),
+  ('Standard'),
   ('Premium'),
   ('Gold'),
   ('VIP');

@@ -28,7 +28,11 @@ public class CartService {
 	}
 	
 	public List<Cart> getCartByUserId(Long userId) {
-		return cartRepository.findByUserId(userId);
+		try {
+			return cartRepository.findByUserId(userId);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public Cart createTicket(Long userId, List<Long> ticketIds) {
@@ -39,21 +43,12 @@ public class CartService {
 
 		return cart;
 	}
-		
-	public Cart cartSuccess(Long userId
-			, List<Long> ticketIds
-			, Map<Long,Integer> foodIds
-			, Map<Long,Integer> drinkIds
-			, Map<Long,Integer> alcoholIds) {
-		Cart cart = new Cart();
-		cart.setUserId(userId);
-		cart.setTicketCart(ticketIds);
-		cart.setFoodCart(foodIds);
-		cart.setDrinkCart(drinkIds);
-		cart.setAlcoholCart(alcoholIds);
-		cartRepository.save(cart);
 
-		return cart;
-		
+	public void cartSuccess(Cart cart) {
+		cartRepository.save(cart);
+	}
+
+	public void deleteCart(Cart cart) {
+		cartRepository.delete(cart);
 	}
 }
