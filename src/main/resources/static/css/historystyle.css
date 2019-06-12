@@ -21,6 +21,7 @@ hr {
 
 table {
   border-collapse: collapse;
+  empty-cells: show;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
