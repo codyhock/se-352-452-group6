@@ -25,47 +25,51 @@ public class TicketService {
 	}
 
 	@Transactional
-	public Ticket createTicket(Ticket t) {
+	public Ticket createTicket(Ticket t, Long userId) {
 		try {
 			entityManager.persist(t);
 			entityManager.flush();
 			ticketRepository.findBySeat(t.getSeat());
 			return ticketRepository.findBySeat(t.getSeat());
 		} catch (Exception e) {
-			logService.logError("test_user", "create ticket");
+			logService.logError(userId, "create ticket");
 			return null;
 		}
 	}
 	
-	public List<Ticket> getTickets() {
+	public List<Ticket> getTickets(Long userId) {
 		 try {
 			 List<Ticket> tickets = ticketRepository.findAll();
-			 logService.logSuccess("test_user", "getAllTickets");
+			 logService.logSuccess(userId, "getAllTickets");
 		     return tickets;
 		 }	 catch (Exception e) {
-			 logService.logError("test_user", "getAllTickets");
+			 logService.logError(userId, "getAllTickets");
 		     return null;
 		     }
 	}
 	
-	public List<Ticket> findTicketsByid(Long ticketid) {
+	public List<Ticket> findTicketsByid(Long ticketid, Long userId) {
 		 try {
 			 List<Ticket> tickets = ticketRepository.findByid(ticketid);
-			 logService.logSuccess("test_user", "findByid" + ticketid);
+			 logService.logSuccess(userId, "findByid" + ticketid);
 		     return tickets;
 		 }	 catch (Exception e) {
-			 logService.logError("test_user", "findByid" + ticketid);
+			 logService.logError(userId, "findByid" + ticketid);
 		     return null;
 		     }
 	}
+
+	public void deleteTicket(Ticket ticket) {
+		ticketRepository.delete(ticket);
+	}
 	
-	public List<Ticket> findTicketsByUser(Seat seat) {
+	public List<Ticket> findTicketsByUser(Seat seat, Long userId) {
 		 try {
 			 List<Ticket> tickets = ticketRepository.findByUser(seat);
-			 logService.logSuccess("test_user", "findByUser" + seat);
+			 logService.logSuccess(userId, "findByUser" + seat);
 		     return tickets;
 		 }	 catch (Exception e) {
-			 logService.logError("test_user", "findByUser" + seat);
+			 logService.logError(userId, "findByUser" + seat);
 		     return null;
 		     }
 	}

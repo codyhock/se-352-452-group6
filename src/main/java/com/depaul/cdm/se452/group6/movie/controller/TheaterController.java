@@ -25,13 +25,13 @@ public class TheaterController {
   }
 
   @GetMapping("movie-listings")
-  public String getMoviesByDate(Model model) {
+  public String getMoviesByDate(Model model, @SessionAttribute(name="userID") Long userID) {
     /*
     Date hardcoded for initial view as we would have to populate tables for many
     future dates to display current date availability
      */
     LocalDate date = LocalDate.of(2019,4,13);
-    List<Theater> theaters = theaterService.getTheatersByDate(date);
+    List<Theater> theaters = theaterService.getTheatersByDate(date, userID);
     HashMap<String, ArrayList<Theater>> movies = new HashMap<>();
     for (Theater theater: theaters) {
         String name = theater.getMovieID().getName();
@@ -53,7 +53,8 @@ public class TheaterController {
   public String reviewRedirect(@ModelAttribute("theaters") Theaters theaters, @PathVariable Long id,
                                Model model, BindingResult result, HttpServletRequest request) {
 
-    HttpSession session = request.getSession(true);
+    //HttpSession session = request.getSession(true);
+    HttpSession session = request.getSession();
     session.setAttribute("theaters", theaters.getTheaters());
     return "redirect:/reviews/movie/" + id;
   }

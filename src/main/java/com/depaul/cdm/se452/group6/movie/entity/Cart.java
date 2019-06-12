@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @Document(collection = "cart")
 public class Cart implements Serializable {
+	private String _id;
 	private Long userId;
 	private List<Long> ticketCart;
 	private Map<Long,Integer> foodCart = new HashMap<Long,Integer>();

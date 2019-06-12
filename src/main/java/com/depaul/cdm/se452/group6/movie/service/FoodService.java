@@ -16,46 +16,46 @@ public class FoodService {
 		this.logService = logService;
 	}
 
-	public List<Food> getAllFood() {
+	public List<Food> getAllFood(Long userId) {
 		try {
 			List<Food> listOfFood = foodRepository.findAll();
-			logService.logSuccess("test_user", "getFood");
+			logService.logSuccess(userId, "getFood");
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getFood");
+			logService.logError(userId, "getFood");
 			return null;
 		}
 	}
 
-	public List<Food> getFoodByItem(String item) {
+	public List<Food> getFoodByItem(String item, Long userId) {
 		try {
 			List<Food> listOfFood = foodRepository.findByItem(item);
-			logService.logSuccess("test_user", "getFoodByItem " + item);
+			logService.logSuccess(userId, "getFoodByItem " + item);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getFoodByItem " + item);
+			logService.logError(userId, "getFoodByItem " + item);
 			return null;
 		}
 	}
 
-	public List<Food> getFoodByItemAndSize(String item, String size) {
+	public List<Food> getFoodByItemAndSize(String item, String size, Long userId) {
 		try {
 			List<Food> listOfFood = foodRepository.findByItem(item);
-			logService.logSuccess("test_user", "getFoodByItemAndSize " + item + ", " + size);
+			logService.logSuccess(userId, "getFoodByItemAndSize " + item + ", " + size);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getFoodByItemAndSize " + item + ", " + size);
+			logService.logError(userId, "getFoodByItemAndSize " + item + ", " + size);
 			return null;
 		}
 	}
 	
-	public Food getFoodById(long id) {
+	public Food getFoodById(long id, Long userId) {
 		try {
 			Food food = foodRepository.findById(id);
-			logService.logSuccess("test_user", "getFoodByFoodId " + id);
+			logService.logSuccess(userId, "getFoodByFoodId " + id);
 			return food;
 		} catch (Exception e) {
-			logService.logError("test_user", "getFoodByFoodId " + id);
+			logService.logError(userId, "getFoodByFoodId " + id);
 			return null;
 		}
 	}

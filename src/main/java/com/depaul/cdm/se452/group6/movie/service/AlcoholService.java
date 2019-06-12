@@ -17,46 +17,46 @@ public class AlcoholService {
 		this.logService = logService;
 	}
 	
-	public List<AlcoholItem> getAllAlcohol() { 
+	public List<AlcoholItem> getAllAlcohol(Long userId) {
 		try {
 			List<AlcoholItem> listOfFood = alcoholRepository.findAll();
-			logService.logSuccess("test_user", "getAlcohol");
+			logService.logSuccess(userId, "getAlcohol");
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getAlcohol");
+			logService.logError(userId, "getAlcohol");
 			return null;
 		}
 	}
 	
-	public List<AlcoholItem> getAlcoholByType(String type) {
+	public List<AlcoholItem> getAlcoholByType(String type, Long userId) {
 		try {
 			List<AlcoholItem> listOfFood = alcoholRepository.findByType(type);
-			logService.logSuccess("test_user", "getAlcoholByType " + type);
+			logService.logSuccess(userId, "getAlcoholByType " + type);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getAlcoholByType " + type);
+			logService.logError(userId, "getAlcoholByType " + type);
 			return null;
 		}
 	}
 
-	public List<AlcoholItem> getAlcoholByPrice(Double price) {
+	public List<AlcoholItem> getAlcoholByPrice(Double price, Long userId) {
 		try {
 			List<AlcoholItem> listOfFood = alcoholRepository.findByPrice(price);
-			logService.logSuccess("test_user", "getAlcoholByPrice " + price);
+			logService.logSuccess(userId, "getAlcoholByPrice " + price);
 			return listOfFood;
 		} catch (Exception e) {
-			logService.logError("test_user", "getAlcoholByPrice " + price);
+			logService.logError(userId, "getAlcoholByPrice " + price);
 			return null;
 		}
 	}
 	
-	public AlcoholItem getAlcoholById(long id) {
+	public AlcoholItem getAlcoholById(long id, Long userId) {
 		try {
 			AlcoholItem alcoholItem = alcoholRepository.findById(id);
-			logService.logSuccess("test_user", "getAlcoholItemByAlcoholId " + id);
+			logService.logSuccess(userId, "getAlcoholItemByAlcoholId " + id);
 			return alcoholItem;
 		} catch (Exception e) {
-			logService.logError("test_user", "getAlcoholByAlcoholId " + id);
+			logService.logError(userId, "getAlcoholByAlcoholId " + id);
 			return null;
 		}
 	}

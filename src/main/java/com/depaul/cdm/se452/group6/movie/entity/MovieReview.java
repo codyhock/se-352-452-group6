@@ -14,10 +14,8 @@ import javax.validation.constraints.Size;
 @Data
 @Document(collection = "reviews")
 public class MovieReview implements Serializable {
-  /*@Id
-  @GeneratedValue
-  private String _id;*/
 
+  private String _id;
   private Long userID;
   private String userName;
   private Long movieID;

@@ -9,5 +9,6 @@ CREATE TABLE users (
 
     FOREIGN KEY(usertypeid) REFERENCES user_types(id)
    );
-INSERT INTO users(usertypeid, firstname, lastname, email, dateofbirth, phonenumber)
-                  VALUES (1, 'Admin', 'Admin', 'admin@gmail.com', '1990-05-05', '123-456-7890');
+INSERT INTO users(usertypeid, firstname, lastname, email, dateofbirth, phonenumber) VALUES
+  (1, 'Admin', 'Admin', 'admin@gmail.com', '1990-05-05', '123-456-7890'),
+  (4, 'testuser', 'testuser', 'test@gmail.com', '2019-06-12', '123-456-7890');

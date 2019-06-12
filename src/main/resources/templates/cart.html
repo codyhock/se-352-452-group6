@@ -57,9 +57,16 @@
 
     <br>
     <div class="button-block">
-            <button class="button" type="submit">CHECKOUT</button> <button class="button">Empty Cart</button>
+            <button class="button" type="submit">CHECKOUT</button>
     </div>
     </form>
+
+    <div>
+      <form action="#" th:action="@{/emptycart}" method="post">
+        <button class="button">Empty Cart</button>
+      </form>
+    </div>
+
 
     <br>
     <div th:replace="fragments/footer :: footer"></div>

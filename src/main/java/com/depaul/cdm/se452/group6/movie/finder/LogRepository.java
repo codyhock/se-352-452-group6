@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LogRepository extends CrudRepository<Log, Long> {
   List<Log> findAll();
-  List<Log> findByUserName (String userName);
+  List<Log> findByUserId (Long userId);
   List<Log> findByTimeStamp (Date timeStamp);
 }

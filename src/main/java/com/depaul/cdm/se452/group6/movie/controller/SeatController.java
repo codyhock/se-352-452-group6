@@ -33,11 +33,11 @@ public class SeatController {
   }
 
   @GetMapping("theater/{theaterId}/seats")
-  public String getByTheater(@PathVariable long theaterId, Model model) {
-    Theater theater = theaterService.getById(theaterId);
+  public String getByTheater(@PathVariable long theaterId, Model model, @SessionAttribute(name="userID") Long userID) {
+    Theater theater = theaterService.getById(theaterId, userID);
     Movie movie = movieService.getMovie(theater.getMovieID().getId());
-    List<Seat> seats = seatService.getSeatsByTheater(theaterId);
-    List<SeatType> seatTypes = seatService.getSeatTypes();
+    List<Seat> seats = seatService.getSeatsByTheater(theaterId, userID);
+    List<SeatType> seatTypes = seatService.getSeatTypes(userID);
     model.addAttribute("seats", seats);
     model.addAttribute("form", seats);
     model.addAttribute("movieName", movie.getName());
@@ -51,16 +51,17 @@ public class SeatController {
   }
 
   @RequestMapping(value="/seats", method=RequestMethod.POST)
-  public String submit(@ModelAttribute("selectedSeats") Seats userSeats, Model model) {
+  public String submit(@ModelAttribute("selectedSeats") Seats userSeats, Model model,
+                       @SessionAttribute(name="userID") Long userID) {
     List<Ticket> tickets = new ArrayList<Ticket>();
     for (Long seat : userSeats.getSelectedSeats()) {
-      Seat s = seatService.getSeatById(seat);
+      Seat s = seatService.getSeatById(seat, userID);
       s.setAvailability("Unavailable");
-      seatService.updateSeat(s);
+      seatService.updateSeat(s, userID);
       Ticket t = new Ticket();
       t.setSeat(s);
-      t.setUser(userService.findUsersByFirstname("Admin").get(0));
-      tickets.add(ticketService.createTicket(t));
+      t.setUser(userService.findByUserId(userID, userID));
+      tickets.add(ticketService.createTicket(t, userID));
     }
 
     List<Long> ticketIds = new ArrayList<>();
@@ -68,9 +69,8 @@ public class SeatController {
       ticketIds.add(ticket.getId());
     }
 
-    cartService.createTicket(1L, ticketIds);
+    cartService.createTicket(userID, ticketIds);
 
-    model.addAttribute("preOrder", new PreOrder());
     return "redirect:/preorder/form";
   }
 
