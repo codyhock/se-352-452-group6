@@ -22,7 +22,7 @@ public class IndexController {
 	
 	@GetMapping("/")
     public String root(Model model) {
-		userLoginService.loginSuccess(1L, "admin", "1234");
+		//userLoginService.loginSuccess(1L, "admin", "1234");
 		model.addAttribute("userLogin", new UserLogin());
 		model.addAttribute("newUser", new User());
         return "index";
