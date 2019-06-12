@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Document(collection = "logs")
 public class Log implements Serializable {
 
-  private String userName;
+  private Long userId;
   private String action;
   private String result;
   private Date timeStamp;

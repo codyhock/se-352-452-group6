@@ -1,4 +1,5 @@
 package com.depaul.cdm.se452.group6.movie.controller;
+import com.depaul.cdm.se452.group6.movie.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,14 @@ public class ProfileController {
   
 
   @GetMapping("/profile")
-  public String showUser(Long id, Model model) {
-      model.addAttribute("firstname", userService.findByUserId(1L).getFirstname());
-      model.addAttribute("lastname", userService.findByUserId(1L).getLastname());
-      model.addAttribute("email", userService.findByUserId(1L).getEmail());
-      model.addAttribute("dateOfBirth", userService.findByUserId(1L).getDateOfBirth());
-      model.addAttribute("phoneNumber", userService.findByUserId(1L).getPhoneNumber());
-      model.addAttribute("type", userService.findByUserId(1L).getUsertype().getType());
+  public String showUser(Long id, Model model, @SessionAttribute(name="userID") Long userID) {
+      User user = userService.findByUserId(userID, userID);
+      model.addAttribute("firstname", user.getFirstname());
+      model.addAttribute("lastname", user.getLastname());
+      model.addAttribute("email", user.getEmail());
+      model.addAttribute("dateOfBirth", user.getDateofbirth());
+      model.addAttribute("phoneNumber", user.getPhonenumber());
+      model.addAttribute("type", user.getUsertype().getType());
       return "profile";
   }
   

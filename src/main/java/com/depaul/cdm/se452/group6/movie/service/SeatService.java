@@ -29,58 +29,58 @@ public class SeatService {
     this.seatTypeRepository = seatTypeRepository;
   }
 
-  public List<Seat> getSeats() {
+  public List<Seat> getSeats(Long userId) {
     try {
       List<Seat> seats = seatRepository.findAll();
-      logService.logSuccess("test_user", "getAllSeats");
+      logService.logSuccess(userId, "getAllSeats");
       return seats;
     } catch (Exception e) {
-      logService.logError("test_user", "getAllSeats");
+      logService.logError(userId, "getAllSeats");
       return null;
     }
   }
 
-  public List<Seat> getSeatsByTheater(Long theaterId) {
+  public List<Seat> getSeatsByTheater(Long theaterId, Long userId) {
     try {
       List<Seat> seats = seatRepository.findByTheaterId(theaterId);
-      logService.logSuccess("test_user", "getSeatsByTheater " + theaterId);
+      logService.logSuccess(userId, "getSeatsByTheater " + theaterId);
       return seats;
     } catch (Exception e) {
-      logService.logError("test_user", "getSeatsByTheater " + theaterId);
+      logService.logError(userId, "getSeatsByTheater " + theaterId);
       return null;
     }
   }
 
-  public Seat getSeatById(long id) {
+  public Seat getSeatById(long id, Long userId) {
     try {
       Seat seat = seatRepository.findById(id);
-      logService.logSuccess("test_user", "get seat by id");
+      logService.logSuccess(userId, "get seat by id");
       return seat;
     } catch (Exception e) {
-      logService.logError("test_user", "get seat by id");
+      logService.logError(userId, "get seat by id");
       return null;
     }
   }
 
-  public List<SeatType> getSeatTypes() {
+  public List<SeatType> getSeatTypes(Long userId) {
     try {
       List<SeatType> seatTypes = seatTypeRepository.findAll();
-      logService.logSuccess("test_user", "get all seat types");
+      logService.logSuccess(userId, "get all seat types");
       return seatTypes;
     } catch (Exception e) {
-      logService.logError("test_user", "get all seat types");
+      logService.logError(userId, "get all seat types");
       return null;
     }
   }
 
   @Transactional
-  public void updateSeat(Seat seat) {
+  public void updateSeat(Seat seat, Long userId) {
     try {
       entityManager.persist(seat);
       entityManager.flush();
-      logService.logSuccess("test_user", "updating seat");
+      logService.logSuccess(userId, "updating seat");
     } catch (Exception e) {
-      logService.logError("test_user", "updating seat");
+      logService.logError(userId, "updating seat");
     }
   }
 }
