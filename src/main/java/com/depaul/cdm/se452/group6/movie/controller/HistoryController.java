@@ -69,7 +69,7 @@ public class HistoryController {
 
         PurchaseHistory history = historyService.getHistoryByUserId(userID);
         Date date = Calendar.getInstance().getTime();
-        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = format.format(date);
         HistoryEntry entry = new HistoryEntry();
         entry.setDate(strDate);
