@@ -16,7 +16,7 @@
 
     <div th:if="${history}">
 
-        <div th:each="entry : ${ph}">
+        <div th:each="entry : ${history}">
 
             <h2 th:text="${entry.date}"></h2>
 
@@ -27,7 +27,7 @@
                     <th>Additional Info</th>
                 </tr>
 
-                <div th:each="line : ${ph.lines}">
+                <div th:each="line : ${entry.lines}">
                     <tr>
                         <div th:each="val : ${line}">
                             <td th:text="${val}"></td>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div th:unless="${$ph}">
+    <div th:unless="${history}">
         <h3 style="margin-left: 15px">Your history is empty.</h3>
         <p style="margin-left: 15px">This page will fill up as you make purchases.</p>
     </div>

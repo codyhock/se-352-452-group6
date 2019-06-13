@@ -4,14 +4,13 @@ import com.depaul.cdm.se452.group6.movie.entity.*;
 import com.depaul.cdm.se452.group6.movie.service.*;
 import com.depaul.cdm.se452.group6.movie.utility.HistoryEntry;
 import com.depaul.cdm.se452.group6.movie.utility.ParsedEntry;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -46,23 +45,17 @@ public class HistoryController {
 
 
     @GetMapping("/history")
-    public String showUserHistory(Model model) {
+    public String showUserHistory(Model model, @SessionAttribute(name="userID") Long userID) {
 
         //createDummy();
 
-        PurchaseHistory history = historyService.getHistoryByUserId(1L);
+        PurchaseHistory history = historyService.getHistoryByUserId(userID);
         List<ParsedEntry> ph;
         if (history == null || history.getEntries().isEmpty()){
             ph = null;
         }
         else {
-            ph = parseHistory(history.getEntries());
-        }
-
-        for (ParsedEntry entry : ph){
-            for (String[] line : entry.lines){
-                System.out.println("Line: " + line[0] + " " + line[1] + " " + line[2]);
-            }
+            ph = parseHistory(history.getEntries(), userID);
         }
         model.addAttribute("history",ph);
 
@@ -70,45 +63,57 @@ public class HistoryController {
     }
 
 
-    @RequestMapping(value="/history", method= RequestMethod.POST)
-    public String saveAndDisplayHistory(Model model) {
+    @PostMapping("/history")
+    public String saveAndDisplayHistory(Model model, @SessionAttribute(name="userID") Long userID) {
 
-        PurchaseHistory history = historyService.getHistoryByUserId(1L);
-        Date date = new Date();
+
+        PurchaseHistory history = historyService.getHistoryByUserId(userID);
+        Date date = Calendar.getInstance().getTime();
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        String strDate = format.format(date);
+        HistoryEntry entry = new HistoryEntry();
+        entry.setDate(strDate);
+        List<Cart> carts = cartService.getCartByUserId(userID);
+        entry.setCart(carts.get(0));
 
         List<HistoryEntry> entries = new ArrayList<>();
 
         if (history == null || history.getEntries().isEmpty()) {
-            HistoryEntry entry = new HistoryEntry();
-            entry.setDate(date.toString());
-            List<Cart> carts = cartService.getCartByUserId(1L);
-            entry.setCart(carts.get(0));
             entries.add(entry);
-            historyService.pushHistory(1L,entries);
+            historyService.pushHistory(userID,entries);
         }
-        history = historyService.getHistoryByUserId(1L);
-        entries = history.getEntries();
+        else{
+            entries = history.getEntries();
 
-        List<ParsedEntry> ph = parseHistory(entries);
+            entries.add(0,entry);
+            historyService.updateHistory(userID,entries);
+        }
 
-        model.addAttribute("ph",ph);
+        PurchaseHistory updated = historyService.getHistoryByUserId(userID);
+        entries = updated.getEntries();
+
+        List<ParsedEntry> ph = parseHistory(entries, userID);
+
+        for (ParsedEntry parsed : ph){
+            System.out.println(parsed.date);
+        }
+
+        cartService.deleteCart(carts.get(0));
+        model.addAttribute("history",ph);
         return "history";
     }
 
 
-    private List<ParsedEntry> parseHistory(List<HistoryEntry> entries){
+    private List<ParsedEntry> parseHistory(List<HistoryEntry> entries, Long userID){
         List<ParsedEntry> parsed = new LinkedList<>();
         for (HistoryEntry entry : entries){
             ParsedEntry pe = new ParsedEntry();
             List<String[]> lines = new LinkedList<>();
-            String date = entry.getDate();
             Cart cart = entry.getCart();
 
-
-            System.out.println("Looking through tickets");
             if (!cart.getTicketCart().isEmpty() && cart.getTicketCart() != null){
                 for (Long id : cart.getTicketCart()){
-                    List<Ticket> tickets = ticketService.findTicketsByid(id);
+                    List<Ticket> tickets = ticketService.findTicketsByid(id,userID);
                     Seat seat = tickets.get(0).getSeat();
                     Theater theater = seat.getTheater();
                     Movie movie = theater.getMovieID();
@@ -123,7 +128,7 @@ public class HistoryController {
             }
             if (!cart.getFoodCart().isEmpty() && cart.getFoodCart() != null){
                 for (Long id : cart.getFoodCart().keySet()){
-                    Food item = foodService.getFoodById(id);
+                    Food item = foodService.getFoodById(id,userID);
                     String[] line = new String[] {
                             item.getItem(),
                             String.valueOf(cart.getFoodCart().get(id)),
@@ -134,7 +139,7 @@ public class HistoryController {
             }
             if (!cart.getDrinkCart().isEmpty() && cart.getAlcoholCart() != null){
                 for (Long id : cart.getDrinkCart().keySet()){
-                    Drink item = drinkService.getDrinkById(id);
+                    Drink item = drinkService.getDrinkById(id,userID);
                     String[] line = new String[]{
                             item.getItem(),
                             String.valueOf(cart.getDrinkCart().get(id)),
@@ -145,7 +150,7 @@ public class HistoryController {
             }
             if (!cart.getAlcoholCart().isEmpty() && cart.getAlcoholCart() != null){
                 for (Long id : cart.getAlcoholCart().keySet()){
-                    AlcoholItem item = alcoholService.getAlcoholById(id);
+                    AlcoholItem item = alcoholService.getAlcoholById(id,userID);
                     String[] line = new String[]{
                             item.getType(),
                             String.valueOf(cart.getAlcoholCart().get(id)),
@@ -156,37 +161,11 @@ public class HistoryController {
             }
 
             pe.lines = lines;
+            pe.date = entry.getDate();
             parsed.add(pe);
         }
 
         return parsed;
-    }
-
-    private void createDummy(){
-        Cart cart = new Cart();
-        List<Long> tickets = new ArrayList<>();
-        tickets.add(1L);
-        Map<Long,Integer> food= new HashMap<Long, Integer>();
-        food.put(2L,1);
-        food.put(4L,1);
-        Map<Long,Integer> drink = new HashMap<Long, Integer>();
-        drink.put(1L,2);
-        Map<Long,Integer> alcohol = new HashMap<Long, Integer>();
-        alcohol.put(2L,1);
-        cart.setTicketCart(tickets);
-        cart.setFoodCart(food);
-        cart.setDrinkCart(drink);
-        cart.setAlcoholCart(alcohol);
-        Date date = new Date();
-        HistoryEntry entry = new HistoryEntry();
-        entry.setDate(date.toString());
-        entry.setCart(cart);
-        List<HistoryEntry> entries = new LinkedList<>();
-        entries.add(entry);
-        historyService.pushHistory(1L,entries);
-
-        System.out.println("history pushed");
-
     }
 
 }

@@ -43,4 +43,15 @@ public class HistoryService {
         return history;
 
     }
+
+    public PurchaseHistory updateHistory(Long userID, List<HistoryEntry> entries){
+       PurchaseHistory history = historyRepository.findByUserID(userID);
+       historyRepository.delete(history);
+       PurchaseHistory newHistory = new PurchaseHistory();
+       newHistory.setUserID(userID);
+       newHistory.setEntries(entries);
+       historyRepository.save(newHistory);
+
+       return history;
+    }
 }
