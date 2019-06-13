@@ -12,35 +12,42 @@
 
     <h1>Purchase History</h1>
     <hr>
-    <h2 th:text="${date2}"></h2>
 
-    <div class="table-div">
-        <table class="table history-table">
-            <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Additional Info</th>
-            </tr>
 
-            <tr>
-                <td>Avengers</td>
-                <td>2</td>
-                <td>5:45 pm</td>
-            </tr>
+    <div th:if="${history}">
 
-            <tr>
-                <td>Popcorn</td>
-                <td>1</td>
-                <td>Large</td>
-            </tr>
+        <div th:each="entry : ${history}">
 
-            <tr>
-                <td>Soda</td>
-                <td>2</td>
-                <td>Small</td>
-            </tr>
-        </table>
+            <h2 th:text="${entry.date}"></h2>
+
+            <table class="table-div">
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Additional Info</th>
+                </tr>
+
+                <div th:each="line : ${entry.lines}">
+                    <tr>
+                        <div th:each="val : ${line}">
+                            <td th:text="${val}"></td>
+                        </div>
+                    </tr>
+
+
+
+                </div>
+
+            </table>
+        </div>
     </div>
+
+    <div th:unless="${history}">
+        <h3 style="margin-left: 15px">Your history is empty.</h3>
+        <p style="margin-left: 15px">This page will fill up as you make purchases.</p>
+    </div>
+    <br>
+    <br>
 
     <div th:replace="fragments/footer :: footer"></div>
 
